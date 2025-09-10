@@ -1,6 +1,5 @@
 package com.mitrais.rnd.FlightManagementSystem.controller;
 
-import com.mitrais.rnd.FlightManagementSystem.entity.User;
 import com.mitrais.rnd.FlightManagementSystem.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

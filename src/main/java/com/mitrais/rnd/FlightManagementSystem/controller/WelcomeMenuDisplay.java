@@ -1,14 +1,15 @@
 package com.mitrais.rnd.FlightManagementSystem.controller;
 
-import com.mitrais.rnd.FlightManagementSystem.entity.User;
+import com.mitrais.rnd.FlightManagementSystem.entity.AppUser;
 import org.springframework.stereotype.Controller;
 
 @Controller
 public class WelcomeMenuDisplay implements Displayable{
-    private User user;
+    private AppUser appUser;
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(AppUser appUser) {
+        System.out.println("set user to Welcome Menu Display");
+        this.appUser = appUser;
     }
 
     @Override

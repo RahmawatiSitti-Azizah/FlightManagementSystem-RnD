@@ -1,0 +1,2 @@
+INSERT INTO app_user (id, username, password, name, role) VALUES (default, 'admin', 'admin123', 'admin', 'ADMIN');
+INSERT INTO app_user (id, username, password, name, role) VALUES (default, 'passenger1', 'passenger123', 'Passenger 1', 'PASSENGER');
