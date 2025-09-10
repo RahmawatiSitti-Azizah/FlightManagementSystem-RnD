@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class AuthenticationServiceImpl implements AuthenticationService {
     private final UserRepository repository;
     @Override
-    public AppUser login(String username, String password) {
+    public AppUser login(String username, String password) throws EntityNotFoundException{
         AppUser appUser = repository.findByUsernameAndPassword(username,password).orElseThrow(()-> new EntityNotFoundException("Invalid Username/Password"));
         return appUser;
     }
