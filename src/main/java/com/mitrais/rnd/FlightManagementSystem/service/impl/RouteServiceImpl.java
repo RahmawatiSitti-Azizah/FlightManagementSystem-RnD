@@ -1,5 +1,6 @@
 package com.mitrais.rnd.FlightManagementSystem.service.impl;
 
+import com.mitrais.rnd.FlightManagementSystem.constant.ErrorMesssageConstant;
 import com.mitrais.rnd.FlightManagementSystem.entity.Route;
 import com.mitrais.rnd.FlightManagementSystem.repository.RouteRepository;
 import com.mitrais.rnd.FlightManagementSystem.service.RouteService;
@@ -13,7 +14,10 @@ public class RouteServiceImpl implements RouteService {
     private final RouteRepository repository;
 
     @Override
-    public void addRoute(Route route) throws EntityExistsException {
+    public void addRoute(Route route) throws Exception {
+        if (route.getFromDestination().equals(route.getToDestination())){
+            throw new Exception(ErrorMesssageConstant.SAME_DEPARTURE_DESTINATION_ERROR);
+        }
         repository.save(route);
     }
 }

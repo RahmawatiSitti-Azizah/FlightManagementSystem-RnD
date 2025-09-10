@@ -1,5 +1,8 @@
-package com.mitrais.rnd.FlightManagementSystem.controller;
+package com.mitrais.rnd.FlightManagementSystem.controller.admin;
 
+import com.mitrais.rnd.FlightManagementSystem.controller.DestinationManagementDisplay;
+import com.mitrais.rnd.FlightManagementSystem.controller.Displayable;
+import com.mitrais.rnd.FlightManagementSystem.controller.RegisterAircraftDisplay;
 import com.mitrais.rnd.FlightManagementSystem.util.UserContextHolder;
 import com.mitrais.rnd.FlightManagementSystem.enums.AdminOptions;
 import com.mitrais.rnd.FlightManagementSystem.constant.MenuText;
@@ -10,7 +13,7 @@ import java.util.Scanner;
 
 @Controller
 @RequiredArgsConstructor
-public class AdminMenuDisplay implements Displayable{
+public class AdminMenuDisplay implements Displayable {
     private final DestinationManagementDisplay destinationManagementDisplay;
 
     private final RegisterAircraftDisplay registerAircraftDisplayScreen;

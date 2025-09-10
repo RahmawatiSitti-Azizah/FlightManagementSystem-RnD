@@ -1,35 +1,27 @@
-package com.mitrais.rnd.FlightManagementSystem.controller;
+package com.mitrais.rnd.FlightManagementSystem.controller.admin;
 
 import com.mitrais.rnd.FlightManagementSystem.constant.MenuText;
 import com.mitrais.rnd.FlightManagementSystem.entity.Aircraft;
 import com.mitrais.rnd.FlightManagementSystem.entity.Destination;
 import com.mitrais.rnd.FlightManagementSystem.entity.Route;
-import com.mitrais.rnd.FlightManagementSystem.enums.PassengerOptions;
 import com.mitrais.rnd.FlightManagementSystem.service.AircraftService;
 import com.mitrais.rnd.FlightManagementSystem.service.DestinationService;
 import com.mitrais.rnd.FlightManagementSystem.service.RouteService;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import org.springframework.stereotype.Controller;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-@Controller
-@RequiredArgsConstructor
-public class CreateRouteDisplay implements Displayable{
-
+@AllArgsConstructor
+@Component
+public class CreateRouteHandler {
     private final AircraftService aircraftService;
     private final DestinationService destinationService;
     private final RouteService routeService;
 
-    @Setter
-    private Displayable backMenuDisplay;
-
-    @Override
-    public void display() {
-        System.out.println(MenuText.ADD_NEW_ROUTE_HEADER);
+    public void showCreateRoute() {
         showAircraftList();
         showDestinationList();
         showDepartureList();
@@ -100,7 +92,7 @@ public class CreateRouteDisplay implements Displayable{
         return scanner.nextLine();
     }
 
-    private Route getRouteInput() {
+    public Route getRouteInput() {
         Scanner scanner = new Scanner(System.in);
         Destination departure = getDeparture(scanner);
         Destination destination = getDestination(scanner);
@@ -111,7 +103,7 @@ public class CreateRouteDisplay implements Displayable{
     }
 
 
-    private void addNewRoute(Route route) {
+    public void addNewRoute(Route route) {
 
         try {
             routeService.addRoute(route);
@@ -119,15 +111,5 @@ public class CreateRouteDisplay implements Displayable{
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-    }
-
-    @Override
-    public Displayable proceedToNextDisplay() {
-        display();
-
-        Route route = getRouteInput();
-        addNewRoute(route);
-
-        return backMenuDisplay;
     }
 }

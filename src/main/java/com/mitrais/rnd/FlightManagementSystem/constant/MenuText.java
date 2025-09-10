@@ -20,9 +20,7 @@ public class MenuText {
     public static final String DEPARTURE_LIST = "Available Departure List: ";
     public static final String DESTINATION_LIST = "Available Destination List: ";
     public static final String AIRCRAFT_LIST = "Available Aircraft List: ";
-    public static final String SELECT_DESTINATION = "Available Destination List: ";
     public static final String ENTER_DEPARTURE = "Enter Departure: ";
-    public static final String SELECT_AIRCRAFT = "Available Aircraft List: ";
     private static final String ERROR_INPUT = "%s is not available. Please enter available %s";
     public static final String ENTER_DAY = "Enter Day: ";
     private static final String SUCCESS_ADD_ROUTE = "%s -> %s (Day %s with Aircraft %s) is successfully saved!";
