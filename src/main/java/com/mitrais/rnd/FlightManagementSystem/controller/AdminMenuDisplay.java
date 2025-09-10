@@ -11,7 +11,7 @@ import java.util.Scanner;
 @Controller
 @RequiredArgsConstructor
 public class AdminMenuDisplay implements Displayable{
-    private final
+    private final NextDayDisplay nextDayDisplay;
 
     @Override
     public void display() {
@@ -19,7 +19,7 @@ public class AdminMenuDisplay implements Displayable{
         manageMenu();
     }
 
-    private void manageMenu() {
+    private Displayable manageMenu() {
         Scanner scanner = new Scanner(System.in);
         String menu = scanner.nextLine();
         AdminOptions menuOption = AdminOptions.fromCode(menu);
@@ -35,8 +35,7 @@ public class AdminMenuDisplay implements Displayable{
                 System.out.println("create route");
                 break;
             case GO_TO_NEXT_DAY:
-                return
-                break;
+                return nextDayDisplay;
             case SYSTEM_OPERATION:
                 System.out.println("system operation");
                 break;
@@ -44,11 +43,12 @@ public class AdminMenuDisplay implements Displayable{
                 System.out.println("error");
                 break;
         }
+        return null;
     }
 
     @Override
     public Displayable proceedToNextDisplay() {
         display();
-        return null;
+        return manageMenu();
     }
 }

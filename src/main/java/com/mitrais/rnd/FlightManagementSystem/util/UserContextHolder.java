@@ -12,4 +12,4 @@ public class UserContextHolder {
     public static AppUser getUserContext(){
         return UserContextHolder.user;
     }
-;}
+}
