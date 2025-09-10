@@ -29,6 +29,7 @@ public class LoginScreen implements Displayable{
         setUsernameByInputUser(scanner);
         setPasswordByInputUser(scanner);
         nextScreen.setUser(authenticationService.login(username, password));
+        nextScreen.display();
         return nextScreen;
     }
 
