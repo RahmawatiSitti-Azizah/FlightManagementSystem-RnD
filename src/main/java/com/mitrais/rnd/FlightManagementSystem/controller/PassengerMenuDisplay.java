@@ -2,7 +2,7 @@ package com.mitrais.rnd.FlightManagementSystem.controller;
 
 import com.mitrais.rnd.FlightManagementSystem.util.UserContextHolder;
 import com.mitrais.rnd.FlightManagementSystem.constant.MenuText;
-import com.mitrais.rnd.FlightManagementSystem.constant.PassengerOptions;
+import com.mitrais.rnd.FlightManagementSystem.enums.PassengerOptions;
 import org.springframework.stereotype.Controller;
 
 import java.util.Scanner;

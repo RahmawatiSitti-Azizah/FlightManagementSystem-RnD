@@ -1,4 +1,4 @@
-package com.mitrais.rnd.FlightManagementSystem.constant;
+package com.mitrais.rnd.FlightManagementSystem.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
