@@ -6,10 +6,11 @@ import com.mitrais.rnd.FlightManagementSystem.repository.DestinationRepository;
 import com.mitrais.rnd.FlightManagementSystem.service.DestinationService;
 import com.mitrais.rnd.FlightManagementSystem.util.UserContextHolder;
 import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -21,5 +22,15 @@ public class DestinationServiceImpl implements DestinationService {
             throw new EntityExistsException(ErrorMesssageConstant.DESTINATION_ALREADY_EXISTS);
         }
         repository.save(new Destination(null, name, UserContextHolder.getUserContext().getId()));
+    }
+
+    @Override
+    public List<Destination> getAvailableDestination() {
+        return repository.findAll();
+    }
+
+    @Override
+    public Destination getDestinationCityByName(String name) throws EntityNotFoundException {
+        return repository.findByName(name).orElseThrow();
     }
 }

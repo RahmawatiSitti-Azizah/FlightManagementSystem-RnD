@@ -14,11 +14,11 @@ public class AdminMenuDisplay implements Displayable{
     private final DestinationManagementDisplay destinationManagementDisplay;
 
     private final RegisterAircraftDisplay registerAircraftDisplayScreen;
+    private final CreateRouteDisplay createRouteDisplay;
 
     @Override
     public void display() {
         System.out.println(MenuText.getAdminMenuDisplayText(UserContextHolder.getUserContext().getName()));
-        getNextDisplay();
     }
 
     private Displayable getNextDisplay() {
@@ -31,12 +31,11 @@ public class AdminMenuDisplay implements Displayable{
                 registerAircraftDisplayScreen.setBackMenu(this);
                 return registerAircraftDisplayScreen;
             case ADD_DESTINATION:
-                System.out.println("add destination");
                 destinationManagementDisplay.setNextScreen(this);
                 return destinationManagementDisplay;
             case CREATE_ROUTE:
-                System.out.println("create route");
-                break;
+                createRouteDisplay.setBackMenuDisplay(this);
+                return createRouteDisplay;
             case SYSTEM_OPERATION:
                 System.out.println("system operation");
                 break;
