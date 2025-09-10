@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 @Controller
 @RequiredArgsConstructor
-public class LoginScreen implements Displayable{
+public class LoginDisplay implements Displayable{
     private String username;
     private String password;
     private final AuthenticationService authenticationService;

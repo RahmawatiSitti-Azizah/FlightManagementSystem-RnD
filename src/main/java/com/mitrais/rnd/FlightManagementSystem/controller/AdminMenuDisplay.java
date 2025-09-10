@@ -11,14 +11,14 @@ import java.util.Scanner;
 @Controller
 @RequiredArgsConstructor
 public class AdminMenuDisplay implements Displayable{
+    private final DestinationManagementDisplay destinationManagementDisplay;
 
     @Override
     public void display() {
         System.out.println(MenuText.getAdminMenuDisplayText(UserContextHolder.getUserContext().getName()));
-        manageMenu();
     }
 
-    private void manageMenu() {
+    private Displayable manageMenu() {
         Scanner scanner = new Scanner(System.in);
         String menu = scanner.nextLine();
         AdminOptions menuOption = AdminOptions.fromCode(menu);
@@ -29,7 +29,8 @@ public class AdminMenuDisplay implements Displayable{
                 break;
             case ADD_DESTINATION:
                 System.out.println("add destination");
-                break;
+                destinationManagementDisplay.setNextScreen(this);
+                return destinationManagementDisplay;
             case CREATE_ROUTE:
                 System.out.println("create route");
                 break;
@@ -40,11 +41,12 @@ public class AdminMenuDisplay implements Displayable{
                 System.out.println("error");
                 break;
         }
+        return null;
     }
 
     @Override
     public Displayable proceedToNextDisplay() {
         display();
-        return null;
+        return manageMenu();
     }
 }

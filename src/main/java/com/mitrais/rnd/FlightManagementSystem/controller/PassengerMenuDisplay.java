@@ -13,10 +13,9 @@ public class PassengerMenuDisplay implements Displayable{
     @Override
     public void display() {
         System.out.println(MenuText.getAdminMenuDisplayText(UserContextHolder.getUserContext().getName()));
-        manageMenu();
     }
 
-    private void manageMenu() {
+    private Displayable manageMenu() {
         Scanner scanner = new Scanner(System.in);
         String menu = scanner.nextLine();
         PassengerOptions menuOption = PassengerOptions.fromCode(menu);
@@ -31,11 +30,12 @@ public class PassengerMenuDisplay implements Displayable{
                 System.out.println("default");
                 break;
         }
+        return null;
     }
 
     @Override
     public Displayable proceedToNextDisplay() {
         display();
-        return null;
+        return manageMenu();
     }
 }
