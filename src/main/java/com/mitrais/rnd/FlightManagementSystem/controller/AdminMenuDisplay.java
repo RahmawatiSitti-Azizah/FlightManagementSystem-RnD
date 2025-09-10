@@ -11,6 +11,7 @@ import java.util.Scanner;
 @Controller
 @RequiredArgsConstructor
 public class AdminMenuDisplay implements Displayable{
+    private final DestinationManagementDisplay destinationManagementDisplay;
 
     private final RegisterAircraftDisplay registerAircraftDisplayScreen;
 
@@ -30,7 +31,8 @@ public class AdminMenuDisplay implements Displayable{
                 return registerAircraftDisplayScreen;
             case ADD_DESTINATION:
                 System.out.println("add destination");
-                break;
+                destinationManagementDisplay.setNextScreen(this);
+                return destinationManagementDisplay;
             case CREATE_ROUTE:
                 System.out.println("create route");
                 break;

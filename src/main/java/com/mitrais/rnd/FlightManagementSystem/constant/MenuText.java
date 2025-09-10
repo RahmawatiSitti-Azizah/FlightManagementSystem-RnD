@@ -7,6 +7,9 @@ import org.springframework.stereotype.Component;
 public class MenuText {
     private static final String ADMIN_MENU_DISPLAY = "Welcome, %s!\nPlease select menu\n1.Register Aircraft\n2.Register New Destination\n3.Create Route\n4.System Operation";
     private static final String PASSENGER_MENU_DISPLAY = "Welcome, %s!\nPlease select menu\n1.Book Flight\n2.My Bookings";
+    public static final String ADD_DESTINATION_HEADER = "===== ADD DESTINATION =====";
+    public static final String ENTER_DESTINATION_NAME = "Enter destination name: ";
+    private static final String DESTINATION_SUCCESSFULLY_ADDED = "%s added as a destination!\n";
     private static final String SUCCESS_ADD_AIRCRAFT = "Aircraft %s with %s capacity is successfully saved!\n\n";
 
     public static final String REGISTER_AIRCRAFT_HEADER = "---------------REGISTER AIRCRAFT---------------\n";
@@ -25,4 +28,7 @@ public class MenuText {
         return String.format(SUCCESS_ADD_AIRCRAFT, name, capacity);
     }
 
+    public static String getDestinationSuccessfullyAdded(String name){
+        return String.format(DESTINATION_SUCCESSFULLY_ADDED, name);
+    }
 }

@@ -1,6 +1,6 @@
 create table if not exists aircraft (
     seat_capacity integer not null,
-    id uuid not null,
+    id uuid default RANDOM_UUID() not null,
     name varchar(255),
     primary key (id)
 );
@@ -14,8 +14,10 @@ create table if not exists app_user (
 );
 create table if not exists destination (
     id uuid not null,
-    name varchar(255),
-    primary key (id)
+    name varchar(255) unique,
+    created_by uuid,
+    primary key (id),
+    foreign key (created_by) references app_user(id)
 );
 create table if not exists route (
     aircraft_id uuid,
@@ -27,3 +29,5 @@ create table if not exists route (
     foreign key (from_destination_id) references destination(id),
     foreign key (to_destination_id) references destination(id)
 );
+
+ALTER TABLE destination ADD COLUMN IF NOT EXISTS created_by uuid;

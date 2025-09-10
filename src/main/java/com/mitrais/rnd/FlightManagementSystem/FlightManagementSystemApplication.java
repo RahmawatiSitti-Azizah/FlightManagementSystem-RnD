@@ -1,9 +1,5 @@
 package com.mitrais.rnd.FlightManagementSystem;
 
-import com.mitrais.rnd.FlightManagementSystem.controller.Displayable;
-import com.mitrais.rnd.FlightManagementSystem.controller.LoginScreen;
-import lombok.RequiredArgsConstructor;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
