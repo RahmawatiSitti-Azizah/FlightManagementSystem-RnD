@@ -16,10 +16,9 @@ public class RegisterAircraftDisplay implements Displayable{
 
     private final AircraftService aircraftService;
 
-    private AdminMenuDisplay menuDisplay;
+    private Displayable menuDisplay;
 
-    @Autowired
-    public void setBackMenu(@Lazy AdminMenuDisplay menuDisplay) {
+    public void setBackMenu(Displayable menuDisplay) {
         this.menuDisplay = menuDisplay;
     }
 
