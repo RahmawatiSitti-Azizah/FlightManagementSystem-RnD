@@ -1,7 +1,9 @@
 package com.mitrais.rnd.FlightManagementSystem.controller;
 
-import com.mitrais.rnd.FlightManagementSystem.entity.User;
+import com.mitrais.rnd.FlightManagementSystem.util.UserContextHolder;
+import com.mitrais.rnd.FlightManagementSystem.entity.AppUser;
 import com.mitrais.rnd.FlightManagementSystem.service.AuthenticationService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 
@@ -13,7 +15,8 @@ public class LoginScreen implements Displayable{
     private String username;
     private String password;
     private final AuthenticationService authenticationService;
-    private final WelcomeMenuDisplay nextScreen;
+    private final AdminMenuDisplay adminMenu;
+    private final PassengerMenuDisplay passengerMenu;
 
     @Override
     public void display() {
@@ -28,9 +31,21 @@ public class LoginScreen implements Displayable{
         Scanner scanner = new Scanner(System.in);
         setUsernameByInputUser(scanner);
         setPasswordByInputUser(scanner);
-        nextScreen.setUser(authenticationService.login(username, password));
-        nextScreen.display();
-        return nextScreen;
+        try {
+            AppUser user = authenticationService.login(username, password);
+            UserContextHolder.setUserContext(user);
+            switch(user.getRole()){
+                case "ADMIN":{
+                    return adminMenu;
+                }
+                default:{
+                    return passengerMenu;
+                }
+            }
+        }catch (EntityNotFoundException e){
+            System.out.println(e.getMessage());
+            return this;
+        }
     }
 
     private void setUsernameByInputUser(Scanner scanner){

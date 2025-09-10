@@ -1,7 +1,8 @@
 package com.mitrais.rnd.FlightManagementSystem.service;
 
-import com.mitrais.rnd.FlightManagementSystem.entity.User;
+import com.mitrais.rnd.FlightManagementSystem.entity.AppUser;
+import jakarta.persistence.EntityNotFoundException;
 
 public interface AuthenticationService {
-    public User login(String username, String password);
+    public AppUser login(String username, String password) throws EntityNotFoundException;
 }

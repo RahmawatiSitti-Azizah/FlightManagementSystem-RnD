@@ -1,23 +1,20 @@
 package com.mitrais.rnd.FlightManagementSystem.controller;
 
+import com.mitrais.rnd.FlightManagementSystem.util.UserContextHolder;
 import com.mitrais.rnd.FlightManagementSystem.constant.AdminOptions;
 import com.mitrais.rnd.FlightManagementSystem.constant.MenuText;
-import com.mitrais.rnd.FlightManagementSystem.entity.User;
-import lombok.Setter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 
 import java.util.Scanner;
 
 @Controller
+@RequiredArgsConstructor
 public class AdminMenuDisplay implements Displayable{
-    @Setter
-    private User user;
-
-    private final MenuText text = new MenuText();
 
     @Override
     public void display() {
-        System.out.println(text.getAdminMenuDisplayText(user.getName()));
+        System.out.println(MenuText.getAdminMenuDisplayText(UserContextHolder.getUserContext().getName()));
         manageMenu();
     }
 
@@ -47,6 +44,7 @@ public class AdminMenuDisplay implements Displayable{
 
     @Override
     public Displayable proceedToNextDisplay() {
+        display();
         return null;
     }
 }

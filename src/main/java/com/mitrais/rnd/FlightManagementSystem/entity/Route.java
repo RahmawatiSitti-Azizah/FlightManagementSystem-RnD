@@ -1,10 +1,16 @@
 package com.mitrais.rnd.FlightManagementSystem.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.UUID;
 
 @Entity
+@AllArgsConstructor
+@Getter
+@Setter
 public class Route {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
