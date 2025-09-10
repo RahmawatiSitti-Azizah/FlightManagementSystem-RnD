@@ -11,6 +11,7 @@ import java.util.Scanner;
 @Controller
 @RequiredArgsConstructor
 public class AdminMenuDisplay implements Displayable{
+    private final
 
     @Override
     public void display() {
@@ -32,6 +33,9 @@ public class AdminMenuDisplay implements Displayable{
                 break;
             case CREATE_ROUTE:
                 System.out.println("create route");
+                break;
+            case GO_TO_NEXT_DAY:
+                return
                 break;
             case SYSTEM_OPERATION:
                 System.out.println("system operation");
