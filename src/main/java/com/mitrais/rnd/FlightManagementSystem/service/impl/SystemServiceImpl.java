@@ -4,7 +4,6 @@ import com.mitrais.rnd.FlightManagementSystem.constant.ConfigNameConstant;
 import com.mitrais.rnd.FlightManagementSystem.entity.SystemConfig;
 import com.mitrais.rnd.FlightManagementSystem.repository.SystemConfigRepository;
 import com.mitrais.rnd.FlightManagementSystem.service.SystemService;
-import com.mitrais.rnd.FlightManagementSystem.util.SystemContextHolder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,10 +19,9 @@ public class SystemServiceImpl implements SystemService {
                     Integer day = Integer.getInteger(systemConfig.getConfigValue())+1;
                     systemConfig.setConfigValue(String.valueOf(day));
                     repository.save(systemConfig);
-                    SystemContextHolder.setSystemDayConfig(systemConfig);
                     },
                 () -> {
-                    SystemConfig systemDayConfig = SystemContextHolder.getSystemDayConfig();
+                    SystemConfig systemDayConfig = new SystemConfig(null, ConfigNameConstant.SYSTEM_DAY, "1");
                     Integer day = Integer.getInteger(systemDayConfig.getConfigValue())+1;
                     systemDayConfig.setConfigValue(String.valueOf(day));
                     repository.save(systemDayConfig);
@@ -33,7 +31,11 @@ public class SystemServiceImpl implements SystemService {
 
     @Override
     public SystemConfig getCurrentSystemDay() {
-
-        return null;
+        SystemConfig result = repository.findByName(ConfigNameConstant.SYSTEM_DAY).orElse(null);
+        if(result == null){
+            result = new SystemConfig(null, ConfigNameConstant.SYSTEM_DAY, "1");
+            result = repository.save(result);
+        }
+        return result;
     }
 }

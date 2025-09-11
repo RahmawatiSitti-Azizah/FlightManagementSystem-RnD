@@ -25,7 +25,7 @@ public class LoginDisplay implements Displayable{
     @Override
     public void display() {
         System.out.println(MenuText.WELCOME_PROGRAM_BANNER);
-        System.out.println(MenuText.getCurrentDayDisplay());
+        System.out.println(MenuText.getCurrentDayDisplay(systemService.getCurrentSystemDay()));
     }
 
     @Override

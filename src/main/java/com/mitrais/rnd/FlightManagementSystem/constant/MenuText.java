@@ -1,7 +1,7 @@
 package com.mitrais.rnd.FlightManagementSystem.constant;
 
 import com.mitrais.rnd.FlightManagementSystem.entity.Route;
-import com.mitrais.rnd.FlightManagementSystem.util.SystemContextHolder;
+import com.mitrais.rnd.FlightManagementSystem.entity.SystemConfig;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -49,7 +49,7 @@ public class MenuText {
         return String.format(SUCCESS_ADD_ROUTE, route.getFromDestination().getName(), route.getToDestination().getName(), route.getFlightDay(), route.getAircraft().getName());
     }
 
-    public static String getCurrentDayDisplay(){
-        return String.format(CURRENT_DAY_DISPLAY, SystemContextHolder.getSystemDayConfig().getConfigValue());
+    public static String getCurrentDayDisplay(SystemConfig currentSystemDay){
+        return String.format(CURRENT_DAY_DISPLAY, currentSystemDay.getConfigValue());
     }
 }

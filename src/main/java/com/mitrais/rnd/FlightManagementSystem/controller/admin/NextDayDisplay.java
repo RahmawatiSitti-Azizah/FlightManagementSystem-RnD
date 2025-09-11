@@ -18,13 +18,13 @@ public class NextDayDisplay implements Displayable {
     @Override
     public void display() {
         System.out.println(MenuText.NEXT_DAY_DISPLAY);
+        systemService.advanceSystemDay();
+        System.out.println(MenuText.getCurrentDayDisplay(systemService.getCurrentSystemDay()));
     }
 
     @Override
     public Displayable proceedToNextDisplay() {
         display();
-        systemService.advanceSystemDay();
-        System.out.println(MenuText.getCurrentDayDisplay());
         return backScreen;
     }
 }
