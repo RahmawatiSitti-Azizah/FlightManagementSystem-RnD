@@ -20,7 +20,7 @@ public class Seat {
 	private UUID id;
 	@OneToOne
 	@JoinColumn(name="route_id", nullable = true)
-	private UUID routeId;
+	private Route route;
 	private int seatNumber;
 	@Column(columnDefinition = "true")
 	private boolean isAvailable;

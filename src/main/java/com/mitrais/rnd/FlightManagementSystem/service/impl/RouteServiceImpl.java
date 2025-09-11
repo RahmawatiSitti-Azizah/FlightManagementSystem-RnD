@@ -29,8 +29,8 @@ public class RouteServiceImpl implements RouteService {
 		if (route.getFromDestination().getId().equals(route.getToDestination().getId())){
 			throw new RouteErrorException();
 		}
-		seatService.populateSeatsOnRoute(route);
 		repository.save(route);
+		seatService.populateSeatsOnRoute(route);
 	}
 	
 	@Override

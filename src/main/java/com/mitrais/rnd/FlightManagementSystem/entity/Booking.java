@@ -13,6 +13,9 @@ import java.util.UUID;
 @Getter
 @Setter
 @NoArgsConstructor
+@Table(name = "booking", uniqueConstraints = {
+		@UniqueConstraint(columnNames = {"aircraft", "transitDestination", "fromDestination", "toDestination", "flightDay", "user"})
+})
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -31,9 +34,12 @@ public class Booking {
     @OneToOne
     @JoinColumn(name = "to_destination_id", nullable = true)
 	private Destination toDestination;
-	@OneToOne
-	@JoinColumn(name="seat_id", nullable = false)
-	private int seatId;
     private int flightDay;
     private String status;
+	@OneToOne
+	@JoinColumn(name="seat_id", nullable = false)
+	private Seat seat;
+	@OneToOne
+	@JoinColumn(name="user_id", nullable = false)
+	private AppUser user;
 }

@@ -7,6 +7,7 @@ import com.mitrais.rnd.FlightManagementSystem.entity.Route;
 import com.mitrais.rnd.FlightManagementSystem.exception.NoSeatException;
 import com.mitrais.rnd.FlightManagementSystem.service.BookingService;
 import lombok.AllArgsConstructor;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -48,6 +49,9 @@ public class ChooseFlightHandler {
 			return bookingService.createBooking(route);
 		} catch (NoSeatException e) {
 			System.out.println(e.getMessage());
+			throw e;
+		} catch (DuplicateKeyException e) {
+			System.out.println("same booking");
 			throw e;
 		}
 	}
