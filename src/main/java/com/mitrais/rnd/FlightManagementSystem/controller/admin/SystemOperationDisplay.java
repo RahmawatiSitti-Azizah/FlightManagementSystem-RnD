@@ -13,6 +13,8 @@ import java.util.Scanner;
 @RequiredArgsConstructor
 public class SystemOperationDisplay implements Displayable {
     private final NextDayDisplay nextDayDisplay;
+    private final EnableBookingDisplay enableBookingDisplay;
+    private final DisableBookingDisplay disableBookingDisplay;
     @Setter
     private Displayable backMenu;
 
@@ -36,8 +38,13 @@ public class SystemOperationDisplay implements Displayable {
             case RUN_FLIGHT:{
                 System.out.println("RUN FLIGHT HERE");
             }
-            case ENABLE_DISABLE_BOOKING:{
-                System.out.println("ENABLE/DISABLE BOOKING SERVICE");
+            case ENABLE_BOOKING:{
+                enableBookingDisplay.setBackMenu(this);
+                return enableBookingDisplay;
+            }
+            case DISABLE_BOOKING:{
+                disableBookingDisplay.setBackMenu(this);
+                return disableBookingDisplay;
             }
         }
         return null;
