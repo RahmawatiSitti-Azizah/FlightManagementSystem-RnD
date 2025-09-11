@@ -36,7 +36,7 @@ create table if not exists route (
 create table if not exists booking (
     id uuid not null,
     booking_id varchar(255) unique,
-    seat_number varchar(255) unique,
+    seat_id uuid,
     status varchar(255) unique,
     aircraft_id uuid,
     from_destination_id uuid,
@@ -45,6 +45,7 @@ create table if not exists booking (
     flight_day integer not null,
     primary key (id),
     foreign key (aircraft_id) references aircraft(id),
+    foreign key (seat_id) references seat(id),
     foreign key (from_destination_id) references destination(id),
     foreign key (transit_destination_id) references destination(id),
     foreign key (to_destination_id) references destination(id)
@@ -56,5 +57,14 @@ create table if not exists system_config (
     config_value varchar(50),
     primary key (id)
 );
+
+create table if not exists seat (
+    id uuid not null,
+    route_id uuid,
+    seat_number integer not null,
+    is_available boolean default true,
+    primary key(id),
+    foreign key (route_id) references route(id)
+)
 
 ALTER TABLE destination ADD COLUMN IF NOT EXISTS created_by uuid;
