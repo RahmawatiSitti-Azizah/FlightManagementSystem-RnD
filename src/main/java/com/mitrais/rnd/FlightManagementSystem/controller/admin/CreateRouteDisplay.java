@@ -38,7 +38,11 @@ public class CreateRouteDisplay implements Displayable {
         display();
 
         Route route = createRouteHandler.getRouteInput();
-        createRouteHandler.addNewRoute(route);
+        try {
+            createRouteHandler.addNewRoute(route);
+        } catch (Exception e) {
+            return this;
+        }
 
         return backMenuDisplay;
     }

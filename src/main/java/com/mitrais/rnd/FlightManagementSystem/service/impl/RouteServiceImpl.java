@@ -15,7 +15,7 @@ public class RouteServiceImpl implements RouteService {
 
     @Override
     public void addRoute(Route route) throws Exception {
-        if (route.getFromDestination().equals(route.getToDestination())){
+        if (route.getFromDestination().getId().equals(route.getToDestination().getId())){
             throw new Exception(ErrorMesssageConstant.SAME_DEPARTURE_DESTINATION_ERROR);
         }
         repository.save(route);

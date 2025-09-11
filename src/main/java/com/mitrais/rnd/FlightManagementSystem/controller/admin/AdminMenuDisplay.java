@@ -1,8 +1,6 @@
 package com.mitrais.rnd.FlightManagementSystem.controller.admin;
 
-import com.mitrais.rnd.FlightManagementSystem.controller.DestinationManagementDisplay;
 import com.mitrais.rnd.FlightManagementSystem.controller.Displayable;
-import com.mitrais.rnd.FlightManagementSystem.controller.RegisterAircraftDisplay;
 import com.mitrais.rnd.FlightManagementSystem.util.UserContextHolder;
 import com.mitrais.rnd.FlightManagementSystem.enums.AdminOptions;
 import com.mitrais.rnd.FlightManagementSystem.constant.MenuText;

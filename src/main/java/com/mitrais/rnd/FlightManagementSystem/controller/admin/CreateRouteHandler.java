@@ -29,20 +29,21 @@ public class CreateRouteHandler {
 
     private void showDepartureList() {
         System.out.println(MenuText.DEPARTURE_LIST);
+        showAvailableDestination();
+
+    }
+
+    private void showDestinationList() {
+        System.out.println(MenuText.DESTINATION_LIST);
+        showAvailableDestination();
+    }
+
+    private void showAvailableDestination() {
 
         List<Destination> destinationList = destinationService.getAvailableDestination();
 
         String departureDisplay = destinationList.stream().map(Destination::getName).collect(Collectors.joining(","));
         System.out.println(departureDisplay);
-    }
-
-    private void showDestinationList() {
-        System.out.println(MenuText.DESTINATION_LIST);
-
-        List<Destination> destinationList = destinationService.getAvailableDestination();
-
-        String destinationDisplay = destinationList.stream().map(Destination::getName).collect(Collectors.joining(","));
-        System.out.println(destinationDisplay);
     }
 
     private void showAircraftList() {
@@ -103,13 +104,14 @@ public class CreateRouteHandler {
     }
 
 
-    public void addNewRoute(Route route) {
+    public void addNewRoute(Route route) throws Exception {
 
         try {
             routeService.addRoute(route);
             System.out.println(MenuText.getSuccessAddRoute(route));
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            throw e;
         }
     }
 }
