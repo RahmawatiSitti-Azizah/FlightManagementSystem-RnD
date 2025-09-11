@@ -31,8 +31,6 @@ public class CreateRouteDisplay implements Displayable {
         createRouteHandler.showCreateRoute();
     }
 
-
-
     @Override
     public Displayable proceedToNextDisplay() {
         display();

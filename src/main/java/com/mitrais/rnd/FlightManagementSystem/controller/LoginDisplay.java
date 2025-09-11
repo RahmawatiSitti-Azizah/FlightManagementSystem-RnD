@@ -1,6 +1,7 @@
 package com.mitrais.rnd.FlightManagementSystem.controller;
 
 import com.mitrais.rnd.FlightManagementSystem.controller.admin.AdminMenuDisplay;
+import com.mitrais.rnd.FlightManagementSystem.controller.passenger.PassengerMenuDisplay;
 import com.mitrais.rnd.FlightManagementSystem.util.UserContextHolder;
 import com.mitrais.rnd.FlightManagementSystem.entity.AppUser;
 import com.mitrais.rnd.FlightManagementSystem.service.AuthenticationService;
@@ -35,15 +36,13 @@ public class LoginDisplay implements Displayable{
         try {
             AppUser user = authenticationService.login(username, password);
             UserContextHolder.setUserContext(user);
-            switch(user.getRole()){
-                case "ADMIN":{
-                    return adminMenu;
-                }
-                default:{
-                    return passengerMenu;
-                }
-            }
-        }catch (EntityNotFoundException e){
+			System.out.println(user.getRole());
+			if (user.getRole().equals("ADMIN")) {
+				return adminMenu;
+			}
+			System.out.println(passengerMenu);
+			return passengerMenu;
+		}catch (EntityNotFoundException e){
             System.out.println(e.getMessage());
             return this;
         }

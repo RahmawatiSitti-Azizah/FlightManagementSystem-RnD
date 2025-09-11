@@ -13,13 +13,18 @@ import java.util.UUID;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Route {
+public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+    @Column(unique = true)
+    private String booking_id;
     @OneToOne
     @JoinColumn(name = "aircraft_id", nullable = true)
     private Aircraft aircraft;
+    @OneToOne
+    @JoinColumn(name = "transit_destination_id", nullable = true)
+    private Destination transitDestination;
     @OneToOne
     @JoinColumn(name = "from_destination_id", nullable = true)
     private Destination fromDestination;
@@ -28,5 +33,5 @@ public class Route {
     private Destination toDestination;
     private int flightDay;
     private String status;
-	private int availableSeats;
+    private int seatNumber;
 }

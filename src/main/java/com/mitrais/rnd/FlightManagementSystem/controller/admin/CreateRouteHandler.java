@@ -5,6 +5,7 @@ import com.mitrais.rnd.FlightManagementSystem.constant.MenuText;
 import com.mitrais.rnd.FlightManagementSystem.entity.Aircraft;
 import com.mitrais.rnd.FlightManagementSystem.entity.Destination;
 import com.mitrais.rnd.FlightManagementSystem.entity.Route;
+import com.mitrais.rnd.FlightManagementSystem.enums.FlightStatus;
 import com.mitrais.rnd.FlightManagementSystem.service.AircraftService;
 import com.mitrais.rnd.FlightManagementSystem.service.DestinationService;
 import com.mitrais.rnd.FlightManagementSystem.service.RouteService;
@@ -31,7 +32,6 @@ public class CreateRouteHandler {
     private void showDepartureList() {
         System.out.println(MenuText.DEPARTURE_LIST);
         showAvailableDestination();
-
     }
 
     private void showDestinationList() {
@@ -94,7 +94,7 @@ public class CreateRouteHandler {
         try {
             return Integer.parseInt(scanner.nextLine());
         } catch (Exception e) {
-            System.out.println(ErrorMesssageConstant.ERROR_INPUT_FLIGHT_DAY);
+            System.out.println(ErrorMesssageConstant.ERROR_INPUT_NON_NUMBER);
             return getFlightDay(scanner);
         }
     }
@@ -106,7 +106,7 @@ public class CreateRouteHandler {
         Aircraft aircraft = getAircraft(scanner);
         int flightDay = getFlightDay(scanner);
 
-        return new Route(null, aircraft, departure, destination, flightDay, "");
+        return new Route(null, aircraft, departure, destination, flightDay, FlightStatus.SCHEDULED.getCode(), aircraft.getSeatCapacity());
     }
 
 
