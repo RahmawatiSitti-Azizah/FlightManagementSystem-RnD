@@ -10,7 +10,6 @@ public enum AdminOptions {
     ADD_DESTINATION( "2"),
     CREATE_ROUTE( "3"),
     SYSTEM_OPERATION("4"),
-    GO_TO_NEXT_DAY("5"),
     NO_OPTIONS("0");
 
     private final String code;
