@@ -31,6 +31,6 @@ public class DestinationServiceImpl implements DestinationService {
 
     @Override
     public Destination getDestinationCityByName(String name) throws EntityNotFoundException {
-        return repository.findByName(name).orElseThrow();
+        return repository.findByName(name).orElseThrow(() -> new EntityNotFoundException(ErrorMesssageConstant.showErrorInput("City")));
     }
 }

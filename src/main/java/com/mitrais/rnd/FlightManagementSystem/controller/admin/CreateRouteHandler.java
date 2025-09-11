@@ -1,5 +1,6 @@
 package com.mitrais.rnd.FlightManagementSystem.controller.admin;
 
+import com.mitrais.rnd.FlightManagementSystem.constant.ErrorMesssageConstant;
 import com.mitrais.rnd.FlightManagementSystem.constant.MenuText;
 import com.mitrais.rnd.FlightManagementSystem.entity.Aircraft;
 import com.mitrais.rnd.FlightManagementSystem.entity.Destination;
@@ -61,7 +62,7 @@ public class CreateRouteHandler {
         try {
             return destinationService.getDestinationCityByName(inputDeparture);
         } catch (Exception e) {
-            System.out.println(MenuText.showErrorInput("Departure"));
+            System.out.println(e.getMessage());
             return getDeparture(scanner);
         }
     }
@@ -72,7 +73,7 @@ public class CreateRouteHandler {
         try {
             return destinationService.getDestinationCityByName(inputDestination);
         } catch (Exception e) {
-            System.out.println(MenuText.showErrorInput("Destination"));
+            System.out.println(e.getMessage());
             return getDestination(scanner);
         }
     }
@@ -83,14 +84,19 @@ public class CreateRouteHandler {
         try {
             return aircraftService.getAircraftByName(inputAircraft);
         } catch (Exception e) {
-            System.out.println(MenuText.showErrorInput("Aircraft"));
+            System.out.println(e.getMessage());
             return getAircraft(scanner);
         }
     }
 
-    private String getFlightDay(Scanner scanner) {
+    private int getFlightDay(Scanner scanner) {
         System.out.print(MenuText.ENTER_DAY);
-        return scanner.nextLine();
+        try {
+            return Integer.parseInt(scanner.nextLine());
+        } catch (Exception e) {
+            System.out.println(ErrorMesssageConstant.ERROR_INPUT_FLIGHT_DAY);
+            return getFlightDay(scanner);
+        }
     }
 
     public Route getRouteInput() {
@@ -98,9 +104,9 @@ public class CreateRouteHandler {
         Destination departure = getDeparture(scanner);
         Destination destination = getDestination(scanner);
         Aircraft aircraft = getAircraft(scanner);
-        String flightDay = getFlightDay(scanner);
+        int flightDay = getFlightDay(scanner);
 
-        return new Route(null, aircraft, departure, destination, flightDay);
+        return new Route(null, aircraft, departure, destination, flightDay, "");
     }
 
 

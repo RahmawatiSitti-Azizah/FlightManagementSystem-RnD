@@ -21,7 +21,6 @@ public class MenuText {
     public static final String DESTINATION_LIST = "Available Destination List: ";
     public static final String AIRCRAFT_LIST = "Available Aircraft List: ";
     public static final String ENTER_DEPARTURE = "Enter Departure: ";
-    private static final String ERROR_INPUT = "%s is not available. Please enter available %s";
     public static final String ENTER_DAY = "Enter Day: ";
     private static final String SUCCESS_ADD_ROUTE = "%s -> %s (Day %s with Aircraft %s) is successfully saved!";
 
@@ -33,7 +32,6 @@ public class MenuText {
         return String.format(PASSENGER_MENU_DISPLAY, name);
     }
 
-
     public static String getDestinationSuccessfullyAdded(String name){
         return String.format(DESTINATION_SUCCESSFULLY_ADDED, name);
     }
@@ -41,9 +39,6 @@ public class MenuText {
         return String.format(SUCCESS_ADD_AIRCRAFT, name, capacity);
     }
 
-    public static String showErrorInput(String column) {
-        return String.format(ERROR_INPUT, column, column);
-    }
     public static String getSuccessAddRoute(Route route) {
         return String.format(SUCCESS_ADD_ROUTE, route.getFromDestination().getName(), route.getToDestination().getName(), route.getFlightDay(), route.getAircraft().getName());
     }
