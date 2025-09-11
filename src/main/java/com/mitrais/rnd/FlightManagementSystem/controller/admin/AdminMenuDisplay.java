@@ -33,14 +33,14 @@ public class AdminMenuDisplay implements Displayable {
                 return registerAircraftDisplayScreen;
             }
             case ADD_DESTINATION: {
-                destinationManagementDisplay.setNextScreen(this);
+                destinationManagementDisplay.setBackMenu(this);
                 return destinationManagementDisplay;
             }
             case CREATE_ROUTE:
-                createRouteDisplay.setBackMenuDisplay(this);
+                createRouteDisplay.setBackMenu(this);
                 return createRouteDisplay;
             case SYSTEM_OPERATION: {
-                systemOperationDisplay.setBackScreen(this);
+                systemOperationDisplay.setBackMenu(this);
                 return systemOperationDisplay;
             }
             default:

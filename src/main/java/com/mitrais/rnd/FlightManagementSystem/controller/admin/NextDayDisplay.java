@@ -9,8 +9,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Controller;
 
-import java.util.List;
-
 @Controller
 @RequiredArgsConstructor
 public class NextDayDisplay implements Displayable {
@@ -18,7 +16,7 @@ public class NextDayDisplay implements Displayable {
     private final RouteService routeService;
 
     @Setter
-    private Displayable backScreen;
+    private Displayable backMenu;
 
     @Override
     public void display() {
@@ -37,6 +35,6 @@ public class NextDayDisplay implements Displayable {
     @Override
     public Displayable proceedToNextDisplay() {
         display();
-        return backScreen;
+        return backMenu;
     }
 }

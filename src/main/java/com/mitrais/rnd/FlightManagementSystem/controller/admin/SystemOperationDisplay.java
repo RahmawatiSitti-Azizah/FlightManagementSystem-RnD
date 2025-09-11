@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class SystemOperationDisplay implements Displayable {
     private final NextDayDisplay nextDayDisplay;
     @Setter
-    private Displayable backScreen;
+    private Displayable backMenu;
 
     @Override
     public void display() {
@@ -30,7 +30,7 @@ public class SystemOperationDisplay implements Displayable {
         SystemOperationsOptions option = SystemOperationsOptions.fromCode(scanner.nextLine());
         switch (option){
             case ADVANCE_DAY : {
-                nextDayDisplay.setBackScreen(this);
+                nextDayDisplay.setBackMenu(this);
                 return nextDayDisplay;
             }
             case RUN_FLIGHT:{

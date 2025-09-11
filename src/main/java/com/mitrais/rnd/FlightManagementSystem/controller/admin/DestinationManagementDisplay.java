@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class DestinationManagementDisplay implements Displayable {
     private final DestinationService service;
     @Setter
-    private Displayable nextScreen;
+    private Displayable backMenu;
     @Override
     public void display() {
         System.out.println(ADD_DESTINATION_HEADER);
@@ -34,6 +34,6 @@ public class DestinationManagementDisplay implements Displayable {
         } catch (EntityExistsException e){
             System.out.println(e.getMessage());
         }
-        return nextScreen;
+        return backMenu;
     }
 }
