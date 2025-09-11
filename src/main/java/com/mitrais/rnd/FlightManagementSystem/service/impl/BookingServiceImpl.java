@@ -29,7 +29,8 @@ public class BookingServiceImpl implements BookingService {
 		Booking booking = ObjectTransformer.bookingFromRoute(bookingId, route, seatNumber);
 		
         bookingRepository.save(booking);
-		routeRepository.updateSeatAvailable(booking.getAircraft().getId(), availableSeat );
+		route.setAvailableSeats(availableSeat);
+		routeRepository.save(route);
 		return booking;
     }
 }

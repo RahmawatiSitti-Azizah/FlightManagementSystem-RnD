@@ -10,9 +10,9 @@ import java.util.UUID;
 
 @Entity
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-@NoArgsConstructor
 public class Route {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

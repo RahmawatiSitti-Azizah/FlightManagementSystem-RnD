@@ -13,9 +13,9 @@ import java.util.Scanner;
 @RequiredArgsConstructor
 public class AdminMenuDisplay implements Displayable {
     private final DestinationManagementDisplay destinationManagementDisplay;
-
     private final RegisterAircraftDisplay registerAircraftDisplayScreen;
     private final CreateRouteDisplay createRouteDisplay;
+    private final SystemOperationDisplay systemOperationDisplay;
 
     @Override
     public void display() {
@@ -28,18 +28,21 @@ public class AdminMenuDisplay implements Displayable {
         AdminOptions menuOption = AdminOptions.fromCode(menu);
 
         switch (menuOption) {
-            case AIRCRAFTREGISTER:
+            case AIRCRAFTREGISTER: {
                 registerAircraftDisplayScreen.setBackMenu(this);
                 return registerAircraftDisplayScreen;
-            case ADD_DESTINATION:
-                destinationManagementDisplay.setNextScreen(this);
+            }
+            case ADD_DESTINATION: {
+                destinationManagementDisplay.setBackMenu(this);
                 return destinationManagementDisplay;
+            }
             case CREATE_ROUTE:
-                createRouteDisplay.setBackMenuDisplay(this);
+                createRouteDisplay.setBackMenu(this);
                 return createRouteDisplay;
-            case SYSTEM_OPERATION:
-                System.out.println("system operation");
-                break;
+            case SYSTEM_OPERATION: {
+                systemOperationDisplay.setBackMenu(this);
+                return systemOperationDisplay;
+            }
             default:
                 System.out.println("error");
                 break;

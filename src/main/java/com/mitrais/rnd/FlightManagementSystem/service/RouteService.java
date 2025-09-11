@@ -9,5 +9,6 @@ import java.util.List;
 
 public interface RouteService {
     public void addRoute(Route route) throws Exception;
+    public List<Route> getCurrentDayRoute() throws Exception;
     public List<Route> findRouteByDepartureDestination(Destination departure, Destination destination) throws EntityNotFoundException;
 }

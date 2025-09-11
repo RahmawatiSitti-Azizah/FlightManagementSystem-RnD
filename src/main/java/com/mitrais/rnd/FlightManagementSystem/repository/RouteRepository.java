@@ -7,12 +7,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 public interface RouteRepository extends JpaRepository<Route, UUID> {
+    public List<Route> findByFlightDay(int flightDay);
 	@Query("SELECT r FROM Route r WHERE r.fromDestination.id = :departureId AND r.toDestination.id = :destinationId")
     Optional<List<Route>> findByFromDestinationToDestination(UUID departureId, UUID destinationId);
-	@Query("update Route r set r.availableSeats = :availableSear where r.id = :routeId")
-	void updateSeatAvailable(UUID routeId, int availableSeat);
+	@Query("update Route r set r.availableSeats = :availableSeats where r.id = :routeId")
+	void updateSeatAvailable(UUID routeId, int availableSeats);
 }

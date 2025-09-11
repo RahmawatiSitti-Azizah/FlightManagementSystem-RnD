@@ -2,19 +2,10 @@ package com.mitrais.rnd.FlightManagementSystem.controller.admin;
 
 import com.mitrais.rnd.FlightManagementSystem.constant.MenuText;
 import com.mitrais.rnd.FlightManagementSystem.controller.Displayable;
-import com.mitrais.rnd.FlightManagementSystem.entity.Aircraft;
-import com.mitrais.rnd.FlightManagementSystem.entity.Destination;
 import com.mitrais.rnd.FlightManagementSystem.entity.Route;
-import com.mitrais.rnd.FlightManagementSystem.service.AircraftService;
-import com.mitrais.rnd.FlightManagementSystem.service.DestinationService;
-import com.mitrais.rnd.FlightManagementSystem.service.RouteService;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Controller;
-
-import java.util.List;
-import java.util.Scanner;
-import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
@@ -23,7 +14,7 @@ public class CreateRouteDisplay implements Displayable {
     private final CreateRouteHandler createRouteHandler;
 
     @Setter
-    private Displayable backMenuDisplay;
+    private Displayable backMenu;
 
     @Override
     public void display() {
@@ -42,6 +33,6 @@ public class CreateRouteDisplay implements Displayable {
             return this;
         }
 
-        return backMenuDisplay;
+        return backMenu;
     }
 }
