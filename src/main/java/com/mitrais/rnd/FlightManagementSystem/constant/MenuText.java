@@ -11,6 +11,8 @@ public class MenuText {
     private static final String DESTINATION_SUCCESSFULLY_ADDED = "%s added as a destination!";
     private static final String SUCCESS_ADD_AIRCRAFT = "Aircraft %s with %s capacity is successfully saved!\n\n";
     private static final String CURRENT_DAY_DISPLAY = "Current day is now: %s";
+    private static final String SUCCESS_ADD_ROUTE = "%s -> %s (Day %s with Aircraft %s) is successfully saved!";
+    private static final String FLIGHT_SCHEDULE_TODAY = "Flight %s -> %s is scheduled for today.";
     public static final String WELCOME_PROGRAM_BANNER = "---------------------------------------\nWelcome to RnD Flight Management System\n---------------------------------------";
     public static final String REGISTER_AIRCRAFT_HEADER = "===== REGISTER AIRCRAFT =====\n";
     public static final String ADD_DESTINATION_HEADER = "===== ADD DESTINATION =====";
@@ -28,7 +30,6 @@ public class MenuText {
     public static final String AIRCRAFT_LIST = "Available Aircraft List: ";
     public static final String ENTER_DEPARTURE = "Enter Departure: ";
     public static final String ENTER_DAY = "Enter Day: ";
-    private static final String SUCCESS_ADD_ROUTE = "%s -> %s (Day %s with Aircraft %s) is successfully saved!";
 
     public static String getAdminMenuDisplayText(String name) {
         return String.format(ADMIN_MENU_DISPLAY, name);
@@ -51,5 +52,9 @@ public class MenuText {
 
     public static String getCurrentDayDisplay(SystemConfig currentSystemDay){
         return String.format(CURRENT_DAY_DISPLAY, currentSystemDay.getConfigValue());
+    }
+
+    public static String generateTodayFlightScheduleText(Route route){
+        return String.format(FLIGHT_SCHEDULE_TODAY, route.getFromDestination().getName(), route.getToDestination().getName());
     }
 }

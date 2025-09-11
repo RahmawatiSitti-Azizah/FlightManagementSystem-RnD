@@ -16,7 +16,7 @@ public class SystemServiceImpl implements SystemService {
     public void advanceSystemDay() {
         repository.findByName(ConfigNameConstant.SYSTEM_DAY).ifPresentOrElse(
                 systemConfig -> {
-                    Integer day = Integer.getInteger(systemConfig.getConfigValue())+1;
+                    Integer day = Integer.parseInt(systemConfig.getConfigValue())+1;
                     systemConfig.setConfigValue(String.valueOf(day));
                     repository.save(systemConfig);
                     },
