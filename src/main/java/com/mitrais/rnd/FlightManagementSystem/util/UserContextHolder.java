@@ -15,4 +15,4 @@ public class UserContextHolder {
         }
         return UserContextHolder.user;
     }
-;}
+}
