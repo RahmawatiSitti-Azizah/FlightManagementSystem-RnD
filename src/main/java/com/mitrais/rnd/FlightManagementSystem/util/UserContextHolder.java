@@ -10,6 +10,9 @@ public class UserContextHolder {
     }
 
     public static AppUser getUserContext(){
+        if(user == null){
+            return new AppUser();
+        }
         return UserContextHolder.user;
     }
 }
