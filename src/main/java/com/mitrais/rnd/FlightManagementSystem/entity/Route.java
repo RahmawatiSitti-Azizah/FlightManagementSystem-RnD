@@ -24,4 +24,6 @@ public class Route {
     @OneToOne
     @JoinColumn(name = "to_destination_id", nullable = true)
     private Destination toDestination;
+    private int flightDay;
+    private String status;
 }

@@ -1,7 +1,8 @@
-package com.mitrais.rnd.FlightManagementSystem.controller;
+package com.mitrais.rnd.FlightManagementSystem.controller.admin;
 
 import static com.mitrais.rnd.FlightManagementSystem.constant.MenuText.*;
 
+import com.mitrais.rnd.FlightManagementSystem.controller.Displayable;
 import com.mitrais.rnd.FlightManagementSystem.service.DestinationService;
 import jakarta.persistence.EntityExistsException;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +13,7 @@ import java.util.Scanner;
 
 @Controller
 @RequiredArgsConstructor
-public class DestinationManagementDisplay implements Displayable{
+public class DestinationManagementDisplay implements Displayable {
     private final DestinationService service;
     @Setter
     private Displayable nextScreen;

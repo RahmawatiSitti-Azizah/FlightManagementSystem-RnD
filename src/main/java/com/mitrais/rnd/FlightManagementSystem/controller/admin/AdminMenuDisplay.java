@@ -1,5 +1,6 @@
-package com.mitrais.rnd.FlightManagementSystem.controller;
+package com.mitrais.rnd.FlightManagementSystem.controller.admin;
 
+import com.mitrais.rnd.FlightManagementSystem.controller.Displayable;
 import com.mitrais.rnd.FlightManagementSystem.util.UserContextHolder;
 import com.mitrais.rnd.FlightManagementSystem.enums.AdminOptions;
 import com.mitrais.rnd.FlightManagementSystem.constant.MenuText;
@@ -10,10 +11,11 @@ import java.util.Scanner;
 
 @Controller
 @RequiredArgsConstructor
-public class AdminMenuDisplay implements Displayable{
+public class AdminMenuDisplay implements Displayable {
     private final DestinationManagementDisplay destinationManagementDisplay;
 
     private final RegisterAircraftDisplay registerAircraftDisplayScreen;
+    private final CreateRouteDisplay createRouteDisplay;
 
     @Override
     public void display() {
@@ -30,12 +32,11 @@ public class AdminMenuDisplay implements Displayable{
                 registerAircraftDisplayScreen.setBackMenu(this);
                 return registerAircraftDisplayScreen;
             case ADD_DESTINATION:
-                System.out.println("add destination");
                 destinationManagementDisplay.setNextScreen(this);
                 return destinationManagementDisplay;
             case CREATE_ROUTE:
-                System.out.println("create route");
-                break;
+                createRouteDisplay.setBackMenuDisplay(this);
+                return createRouteDisplay;
             case SYSTEM_OPERATION:
                 System.out.println("system operation");
                 break;
@@ -43,7 +44,7 @@ public class AdminMenuDisplay implements Displayable{
                 System.out.println("error");
                 break;
         }
-        return null;
+        return this;
     }
 
     @Override

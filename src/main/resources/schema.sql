@@ -24,6 +24,8 @@ create table if not exists route (
     from_destination_id uuid,
     id uuid not null,
     to_destination_id uuid,
+    flight_day integer not null,
+    status varchar(255) not null,
     primary key (id),
     foreign key (aircraft_id) references aircraft(id),
     foreign key (from_destination_id) references destination(id),
