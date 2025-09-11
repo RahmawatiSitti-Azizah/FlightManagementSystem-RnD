@@ -30,4 +30,11 @@ create table if not exists route (
     foreign key (to_destination_id) references destination(id)
 );
 
+create table if not exists system_config (
+    id int GENERATED ALWAYS AS IDENTITY,
+    name varchar(50) unique,
+    config_value varchar(50),
+    primary key (id)
+);
+
 ALTER TABLE destination ADD COLUMN IF NOT EXISTS created_by uuid;

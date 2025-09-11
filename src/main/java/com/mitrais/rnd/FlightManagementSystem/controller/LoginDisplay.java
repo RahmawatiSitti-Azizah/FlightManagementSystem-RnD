@@ -1,5 +1,8 @@
 package com.mitrais.rnd.FlightManagementSystem.controller;
 
+import com.mitrais.rnd.FlightManagementSystem.constant.MenuText;
+import com.mitrais.rnd.FlightManagementSystem.controller.admin.AdminMenuDisplay;
+import com.mitrais.rnd.FlightManagementSystem.service.SystemService;
 import com.mitrais.rnd.FlightManagementSystem.util.UserContextHolder;
 import com.mitrais.rnd.FlightManagementSystem.entity.AppUser;
 import com.mitrais.rnd.FlightManagementSystem.service.AuthenticationService;
@@ -12,17 +15,17 @@ import java.util.Scanner;
 @Controller
 @RequiredArgsConstructor
 public class LoginDisplay implements Displayable{
-    private String username;
-    private String password;
     private final AuthenticationService authenticationService;
+    private final SystemService systemService;
     private final AdminMenuDisplay adminMenu;
     private final PassengerMenuDisplay passengerMenu;
+    private String username;
+    private String password;
 
     @Override
     public void display() {
-        System.out.println("---------------------------------------");
-        System.out.println("Welcome to RnD Flight Management System");
-        System.out.println("---------------------------------------");
+        System.out.println(MenuText.WELCOME_PROGRAM_BANNER);
+        System.out.println(MenuText.getCurrentDayDisplay());
     }
 
     @Override
@@ -49,12 +52,12 @@ public class LoginDisplay implements Displayable{
     }
 
     private void setUsernameByInputUser(Scanner scanner){
-        System.out.print("username : ");
+        System.out.print(MenuText.ENTER_USERNAME);
         username = scanner.nextLine();
     }
 
     private void setPasswordByInputUser(Scanner scanner){
-        System.out.print("password : ");
+        System.out.print(MenuText.ENTER_PASSWORD);
         password = scanner.nextLine();
     }
 }

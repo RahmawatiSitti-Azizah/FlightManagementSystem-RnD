@@ -1,14 +1,19 @@
-package com.mitrais.rnd.FlightManagementSystem.controller;
+package com.mitrais.rnd.FlightManagementSystem.controller.admin;
 
 import com.mitrais.rnd.FlightManagementSystem.constant.MenuText;
+import com.mitrais.rnd.FlightManagementSystem.controller.Displayable;
 import com.mitrais.rnd.FlightManagementSystem.service.SystemService;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.stereotype.Controller;
 
 @Controller
 @RequiredArgsConstructor
-public class NextDayDisplay implements Displayable{
+public class NextDayDisplay implements Displayable {
     private final SystemService systemService;
+
+    @Setter
+    private Displayable backScreen;
 
     @Override
     public void display() {
@@ -19,6 +24,7 @@ public class NextDayDisplay implements Displayable{
     public Displayable proceedToNextDisplay() {
         display();
         systemService.advanceSystemDay();
-        return null;
+        System.out.println(MenuText.getCurrentDayDisplay());
+        return backScreen;
     }
 }

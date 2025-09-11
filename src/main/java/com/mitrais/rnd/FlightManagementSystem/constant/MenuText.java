@@ -1,6 +1,6 @@
 package com.mitrais.rnd.FlightManagementSystem.constant;
 
-import lombok.Getter;
+import com.mitrais.rnd.FlightManagementSystem.util.SystemContextHolder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -9,12 +9,18 @@ public class MenuText {
     private static final String PASSENGER_MENU_DISPLAY = "Welcome, %s!\nPlease select menu\n1.Book Flight\n2.My Bookings";
     private static final String DESTINATION_SUCCESSFULLY_ADDED = "%s added as a destination!\n";
     private static final String SUCCESS_ADD_AIRCRAFT = "Aircraft %s with %s capacity is successfully saved!\n\n";
+    private static final String CURRENT_DAY_DISPLAY = "Current day is now: %s";
+    public static final String WELCOME_PROGRAM_BANNER = "---------------------------------------\nWelcome to RnD Flight Management System\n---------------------------------------";
     public static final String REGISTER_AIRCRAFT_HEADER = "---------------REGISTER AIRCRAFT---------------\n";
     public static final String ADD_DESTINATION_HEADER = "===== ADD DESTINATION =====";
     public static final String ENTER_DESTINATION_NAME = "Enter destination name: ";
     public static final String ENTER_AIRCRAFT_NAME = "Enter aircraft name: ";
     public static final String AIRCRAFT_CAPACITY = "Enter aircraft capacity: ";
-    public static final String NEXT_DAY_DISPLAY = "";
+    public static final String SYSTEM_OPERATION_HEADER = "===== System Operation =====";
+    public static final String NEXT_DAY_DISPLAY = "Advancing to next day...";
+    public static final String SELECT_MENU_TEXT = "Select menu number : ";
+    public static final String ENTER_USERNAME = "Enter username : ";
+    public static final String ENTER_PASSWORD = "Enter password : ";
 
     public static String getAdminMenuDisplayText(String name) {
         return String.format(ADMIN_MENU_DISPLAY, name);
@@ -30,5 +36,9 @@ public class MenuText {
 
     public static String getDestinationSuccessfullyAdded(String name){
         return String.format(DESTINATION_SUCCESSFULLY_ADDED, name);
+    }
+
+    public static String getCurrentDayDisplay(){
+        return String.format(CURRENT_DAY_DISPLAY, SystemContextHolder.getSystemDayConfig().getConfigValue());
     }
 }

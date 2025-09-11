@@ -17,12 +17,17 @@ public class SystemServiceImpl implements SystemService {
     public void advanceSystemDay() {
         repository.findByName(ConfigNameConstant.SYSTEM_DAY).ifPresentOrElse(
                 systemConfig -> {
-                    Integer day = Integer.getInteger(systemConfig.getValue());
-                    systemConfig.setValue(""+(day+1));
+                    Integer day = Integer.getInteger(systemConfig.getConfigValue())+1;
+                    systemConfig.setConfigValue(String.valueOf(day));
                     repository.save(systemConfig);
                     SystemContextHolder.setSystemDayConfig(systemConfig);
                     },
-                () -> repository.save(new SystemConfig(null, ConfigNameConstant.SYSTEM_DAY, "1"))
+                () -> {
+                    SystemConfig systemDayConfig = SystemContextHolder.getSystemDayConfig();
+                    Integer day = Integer.getInteger(systemDayConfig.getConfigValue())+1;
+                    systemDayConfig.setConfigValue(String.valueOf(day));
+                    repository.save(systemDayConfig);
+                }
         );
     }
 

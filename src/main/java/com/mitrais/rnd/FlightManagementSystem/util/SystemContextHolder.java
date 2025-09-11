@@ -13,7 +13,7 @@ public class SystemContextHolder {
         if(systemDayConfig == null){
             systemDayConfig = new SystemConfig();
             systemDayConfig.setName("system_day");
-            systemDayConfig.setValue("1");
+            systemDayConfig.setConfigValue("1");
         }
         return systemDayConfig;
     }

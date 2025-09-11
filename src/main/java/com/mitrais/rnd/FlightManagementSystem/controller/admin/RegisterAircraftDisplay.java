@@ -1,18 +1,17 @@
-package com.mitrais.rnd.FlightManagementSystem.controller;
+package com.mitrais.rnd.FlightManagementSystem.controller.admin;
 
 import com.mitrais.rnd.FlightManagementSystem.constant.MenuText;
+import com.mitrais.rnd.FlightManagementSystem.controller.Displayable;
 import com.mitrais.rnd.FlightManagementSystem.entity.Aircraft;
 import com.mitrais.rnd.FlightManagementSystem.service.AircraftService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 
 import java.util.Scanner;
 
 @Controller
 @RequiredArgsConstructor
-public class RegisterAircraftDisplay implements Displayable{
+public class RegisterAircraftDisplay implements Displayable {
 
     private final AircraftService aircraftService;
 

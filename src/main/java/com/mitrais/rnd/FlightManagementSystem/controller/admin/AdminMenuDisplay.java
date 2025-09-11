@@ -1,5 +1,6 @@
-package com.mitrais.rnd.FlightManagementSystem.controller;
+package com.mitrais.rnd.FlightManagementSystem.controller.admin;
 
+import com.mitrais.rnd.FlightManagementSystem.controller.Displayable;
 import com.mitrais.rnd.FlightManagementSystem.util.UserContextHolder;
 import com.mitrais.rnd.FlightManagementSystem.enums.AdminOptions;
 import com.mitrais.rnd.FlightManagementSystem.constant.MenuText;
@@ -10,10 +11,10 @@ import java.util.Scanner;
 
 @Controller
 @RequiredArgsConstructor
-public class AdminMenuDisplay implements Displayable{
+public class AdminMenuDisplay implements Displayable {
     private final DestinationManagementDisplay destinationManagementDisplay;
     private final RegisterAircraftDisplay registerAircraftDisplayScreen;
-    private final NextDayDisplay nextDayDisplay;
+    private final SystemOperationDisplay systemOperationDisplay;
 
     @Override
     public void display() {
@@ -26,26 +27,26 @@ public class AdminMenuDisplay implements Displayable{
         AdminOptions menuOption = AdminOptions.fromCode(menu);
 
         switch (menuOption) {
-            case AIRCRAFTREGISTER:
+            case AIRCRAFTREGISTER: {
                 registerAircraftDisplayScreen.setBackMenu(this);
                 return registerAircraftDisplayScreen;
-            case ADD_DESTINATION:
-                System.out.println("add destination");
+            }
+            case ADD_DESTINATION: {
                 destinationManagementDisplay.setNextScreen(this);
                 return destinationManagementDisplay;
+            }
             case CREATE_ROUTE:
                 System.out.println("create route");
                 break;
-            case GO_TO_NEXT_DAY:
-                return nextDayDisplay;
-            case SYSTEM_OPERATION:
-                System.out.println("system operation");
-                break;
+            case SYSTEM_OPERATION: {
+                systemOperationDisplay.setBackScreen(this);
+                return systemOperationDisplay;
+            }
             default:
                 System.out.println("error");
                 break;
         }
-        return null;
+        return this;
     }
 
     @Override

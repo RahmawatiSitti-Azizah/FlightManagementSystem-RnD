@@ -16,5 +16,5 @@ public class SystemConfig {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-    private String value;
+    private String configValue;
 }
