@@ -1,5 +1,6 @@
 package com.mitrais.rnd.FlightManagementSystem.service.impl;
 
+import com.mitrais.rnd.FlightManagementSystem.entity.AppUser;
 import com.mitrais.rnd.FlightManagementSystem.entity.Booking;
 import com.mitrais.rnd.FlightManagementSystem.entity.Route;
 import com.mitrais.rnd.FlightManagementSystem.entity.Seat;
@@ -60,7 +61,7 @@ public class BookingServiceImpl implements BookingService {
 
 	@Override
 	public void updateBookingStatus(List<Booking> bookings, BookingStatus status) {
-		bookings = bookings.stream().map(booking -> {booking.setBooking_id(status.getCode());
+		bookings = bookings.stream().map(booking -> {booking.setStatus(status.name());
 		return booking;}).toList();
 		bookingRepository.saveAll(bookings);
 	}
@@ -77,5 +78,10 @@ public class BookingServiceImpl implements BookingService {
 		result[1].setTransit_booking_id(result[0].getBooking_id());
 		bookingRepository.saveAll(Arrays.asList(result));
 		return result;
+	}
+
+	@Override
+	public List<Booking> getBookingBy(AppUser appUser, BookingStatus status) {
+		return bookingRepository.findByUserIdAndStatus(appUser.getId(), status.name());
 	}
 }

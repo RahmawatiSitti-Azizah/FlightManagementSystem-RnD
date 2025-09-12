@@ -70,6 +70,4 @@ create table if not exists system_config (
 );
 
 ALTER TABLE destination ADD COLUMN IF NOT EXISTS created_by uuid;
-ALTER TABLE booking DROP CONSTRAINT transit_destination_id;
-ALTER TABLE booking DROP COLUMN transit_destination_id;
 ALTER TABLE booking ADD COLUMN IF NOT EXISTS transit_booking_id varchar(255);

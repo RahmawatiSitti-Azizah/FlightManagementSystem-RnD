@@ -37,7 +37,8 @@ public class RouteServiceImpl implements RouteService {
 	
 	@Override
 	public List<Route> findRouteByDepartureDestination(Destination departure, Destination destination){
-		List<Route> routes = repository.findByFromDestinationToDestination(departure.getId(), destination.getId());
+		int flightDay = Integer.parseInt(systemService.getCurrentSystemDay().getConfigValue());
+		List<Route> routes = repository.findByFromDestinationIdAndToDestinationIdAndFlightDayGreaterThanEqual(departure.getId(), destination.getId(), flightDay);
 		return routes;
 	}
 
@@ -53,17 +54,21 @@ public class RouteServiceImpl implements RouteService {
 
 	@Override
 	public List<Route[]> findRouteTransitByDepartureDestination(Destination departure, Destination destination) {
-		List<Route> departureTransitRoute = repository.findByFromDestinationId(departure.getId());
-		List<Route> destinationTransitRoute = repository.findByToDestinationId(destination.getId());
+		int flightDay = Integer.parseInt(systemService.getCurrentSystemDay().getConfigValue());
+		List<Route> departureTransitRoute = repository.findByFromDestinationIdAndFlightDayGreaterThan(departure.getId(), flightDay);
+		List<Route> destinationTransitRoute = repository.findByToDestinationIdAndFlightDayGreaterThan(destination.getId(), flightDay);
 		List<Route[]> transitRoutesList = departureTransitRoute.stream()
 				.map(departureRoute -> new Route[] {
 						departureRoute,
 						destinationTransitRoute.stream()
-								.filter(destinationRoute -> departureRoute.getToDestination().getId().equals(destinationRoute.getFromDestination().getId()))
+								.filter(destinationRoute ->
+										departureRoute.getToDestination().getId().equals(destinationRoute.getFromDestination().getId())
+												&& departureRoute.getFlightDay() == destinationRoute.getFlightDay())
 								.findFirst()
 								.orElse(null)
 				})
 				.toList();
+		transitRoutesList = transitRoutesList.stream().filter(routes -> routes.length == 2 && routes[1]!=null).toList();
 		return transitRoutesList;
 	}
 

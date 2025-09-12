@@ -5,23 +5,20 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public enum AdminOptions {
-    AIRCRAFTREGISTER( "1", "Register Aircraft"),
-    ADD_DESTINATION( "2", "Register Destination"),
-    CREATE_ROUTE( "3","Create Route"),
-    SYSTEM_OPERATION("4","System Operation"),
-    NO_OPTIONS("0", "Logout");
+public enum MyBookingOptions {
+    DELETE( "1", "Delete Booking"),
+    NO_OPTIONS("0","Back to passenger menu");
 
     private final String code;
     private final String display;
 
-    public static AdminOptions fromCode(String code) {
-        for (AdminOptions option : AdminOptions.values()) {
+    public static MyBookingOptions fromCode(String code) {
+        for (MyBookingOptions option : MyBookingOptions.values()) {
             if (option.getCode().equals(code)) {
                 return option;
             }
         }
-        return AdminOptions.NO_OPTIONS;
+        return MyBookingOptions.NO_OPTIONS;
     }
 
     @Override
