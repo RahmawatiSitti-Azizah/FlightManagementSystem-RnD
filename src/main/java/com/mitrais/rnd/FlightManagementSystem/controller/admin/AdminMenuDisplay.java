@@ -43,9 +43,10 @@ public class AdminMenuDisplay implements Displayable {
                 systemOperationDisplay.setBackMenu(this);
                 return systemOperationDisplay;
             }
-            default:
-                System.out.println("error");
+            default: {
+                System.out.println("Invalid menu");
                 break;
+            }
         }
         return this;
     }

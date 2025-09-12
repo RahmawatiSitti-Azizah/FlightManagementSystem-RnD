@@ -28,7 +28,7 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
-    public List<Route> getCurrentDayRoute() throws Exception {
+    public List<Route> getCurrentDayRoute(){
         SystemConfig currentSystemDay = systemService.getCurrentSystemDay();
         Integer currentDay = Integer.parseInt(currentSystemDay.getConfigValue());
         return repository.findByFlightDay(currentDay);
