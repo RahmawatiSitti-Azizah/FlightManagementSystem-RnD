@@ -15,6 +15,8 @@ public class SystemOperationDisplay implements Displayable {
     private final NextDayDisplay nextDayDisplay;
     private final EnableBookingDisplay enableBookingDisplay;
     private final DisableBookingDisplay disableBookingDisplay;
+    private final RunFlightDisplay runFlightDisplay;
+    
     @Setter
     private Displayable backMenu;
 
@@ -36,7 +38,8 @@ public class SystemOperationDisplay implements Displayable {
                 return nextDayDisplay;
             }
             case RUN_FLIGHT:{
-                System.out.println("RUN FLIGHT HERE");
+                runFlightDisplay.setBackMenu(this);
+                return runFlightDisplay;
             }
             case ENABLE_BOOKING:{
                 enableBookingDisplay.setBackMenu(this);
@@ -46,8 +49,10 @@ public class SystemOperationDisplay implements Displayable {
                 disableBookingDisplay.setBackMenu(this);
                 return disableBookingDisplay;
             }
+            default:{
+                return backMenu;
+            }
         }
-        return null;
     }
 
     @Override

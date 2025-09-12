@@ -1,5 +1,6 @@
 package com.mitrais.rnd.FlightManagementSystem.constant;
 
+import com.mitrais.rnd.FlightManagementSystem.entity.Aircraft;
 import com.mitrais.rnd.FlightManagementSystem.entity.Booking;
 import com.mitrais.rnd.FlightManagementSystem.entity.Route;
 import com.mitrais.rnd.FlightManagementSystem.entity.SystemConfig;
@@ -13,7 +14,15 @@ public class MenuText {
     private static final String SUCCESS_ADD_AIRCRAFT = "Aircraft %s with %s capacity is successfully saved!\n\n";
     private static final String CURRENT_DAY_DISPLAY = "Current day is now: %s";
     private static final String SUCCESS_ADD_ROUTE = "%s -> %s (Day %s with Aircraft %s) is successfully saved!";
+    private static final String BOOKING_CREATED = "\n====== Booking confirmed ======\nBooking Details\nBooking ID: %s\nDeparture: %s\nDestination: %s\nFlight Day: %s\nSeat number: %s \n";	
+    private static final String FLIGHT_CONFIRMATION = "You select %s -> %s (Day %s, %s seat(s) available). Are you sure you want to confirm this booking? (y/n) ";
     private static final String FLIGHT_SCHEDULE_TODAY = "Flight %s -> %s is scheduled for today.";
+    private static final String RUNNING_FLIGHT_FOR_DAY = "Running Flight for day %s";
+    private static final String SUCCESS_RUNNING_FLIGHT_FOR_DAY = "All flight for day %s have been completed successfully";
+    private static final String PROCESSING_FLIGHT = "Processing flight: %s -> %s";
+    private static final String AIRCRAFT_NAME = "Aircraft : %s";
+    private static final String PASSENGER_BOARDING = "Passenger boarding : %d";
+    private static final String PASSENGER_LIST_TEXT = "- %s (seat %s)";
     public static final String WELCOME_PROGRAM_BANNER = "---------------------------------------\nWelcome to RnD Flight Management System\n---------------------------------------";
     public static final String REGISTER_AIRCRAFT_HEADER = "===== REGISTER AIRCRAFT =====\n";
     public static final String ADD_DESTINATION_HEADER = "===== ADD DESTINATION =====";
@@ -35,16 +44,15 @@ public class MenuText {
     public static final String SUCCESS_ENABLE_BOOKING_SERVICE = "Booking service enabled";
     public static final String DISABLE_BOOKING_SERVICE = "Disabling booking service...";
     public static final String SUCCESS_DISABLE_BOOKING_SERVICE = "Booking service disabled";
-
     public static final String CREATE_BOOKING = "===== CREATE BOOKING =====\n";
     public static final String SEARCH_FLIGHT = "Searching flight...";
     public static final String FOUND_DIRECT_FLIGHTS = "Found Direct Flights: ";
     public static final String FOUND_TRANSIT_FLIGHTS = "Found Transit Flights: ";
-	public static final String SELECT_FLIGHT = "Input selected flight (number): ";
-	public static final String SHOW_FLIGHT = "%s. %s -> %s (Day %s, %s available seats)";
-	private static final String FLIGHT_CONFIRMATION = "You select %s -> %s (Day %s, %s seat(s) available). Are you sure you want to confirm this booking? (y/n) ";
-	private static final String BOOKING_CREATED = "\n====== Booking confirmed ======\nBooking Details\nBooking ID: %s\nDeparture: %s\nDestination: %s\nFlight Day: %s\nSeat number: %s \n";
-	
+    public static final String SELECT_FLIGHT = "Input selected flight (number): ";
+    public static final String SHOW_FLIGHT = "%s. %s -> %s (Day %s, %s available seats)";
+    public static final String NO_FLIGHT_AVAILABLE_TODAY = "No flight scheduled for today";
+    private static final String FLIGHT_STATUS_CHANGE = "Flight status : %s\nFlight status : %s";
+
     public static String getAdminMenuDisplayText(String name) {
         return String.format(ADMIN_MENU_DISPLAY, name);
     }
@@ -82,5 +90,33 @@ public class MenuText {
 
     public static String generateTodayFlightScheduleText(Route route){
         return String.format(FLIGHT_SCHEDULE_TODAY, route.getFromDestination().getName(), route.getToDestination().getName());
+    }
+
+    public static String getRunningFlightForDay(String day){
+        return String.format(RUNNING_FLIGHT_FOR_DAY, day);
+    }
+
+    public static String getSuccessRunningFlightForDay(String day){
+        return String.format(SUCCESS_RUNNING_FLIGHT_FOR_DAY, day);
+    }
+
+    public static String getProcessingFlight(String departure, String destination){
+        return String.format(PROCESSING_FLIGHT, departure, destination);
+    }
+
+    public static String getAircraftName(String aircraftName){
+        return String.format(AIRCRAFT_NAME, aircraftName);
+    }
+
+    public static String getPassengerBoarding(int totalPassenger){
+        return String.format(PASSENGER_BOARDING, totalPassenger);
+    }
+
+    public static String getProcessFlight(){
+        return String.format(FLIGHT_STATUS_CHANGE, "DEPARTED", "ARRIVED");
+    }
+
+    public static String getPassengerListText(String passengerName, String passengerSeat){
+        return String.format(PASSENGER_LIST_TEXT,passengerName,passengerSeat);
     }
 }

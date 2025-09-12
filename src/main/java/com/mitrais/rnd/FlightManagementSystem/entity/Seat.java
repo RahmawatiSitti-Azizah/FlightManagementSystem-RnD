@@ -10,7 +10,6 @@ import lombok.Setter;
 import java.util.UUID;
 
 @Entity
-@AllArgsConstructor
 @Getter
 @Setter
 @NoArgsConstructor
@@ -24,4 +23,13 @@ public class Seat {
 	private int seatNumber;
 	@Column(columnDefinition = "boolean default true")
 	private boolean isAvailable;
+	@OneToOne(mappedBy="seat")
+	private Booking passenger;
+
+	public Seat(UUID id, Route route, int seatNumber, boolean isAvailable) {
+		this.id = id;
+		this.route = route;
+		this.seatNumber = seatNumber;
+		this.isAvailable = isAvailable;
+	}
 }

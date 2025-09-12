@@ -1,18 +1,19 @@
 package com.mitrais.rnd.FlightManagementSystem.service.impl;
 
 import com.mitrais.rnd.FlightManagementSystem.constant.ErrorMesssageConstant;
-import com.mitrais.rnd.FlightManagementSystem.entity.Destination;
-import com.mitrais.rnd.FlightManagementSystem.entity.Route;
-import com.mitrais.rnd.FlightManagementSystem.entity.SystemConfig;
+import com.mitrais.rnd.FlightManagementSystem.entity.*;
+import com.mitrais.rnd.FlightManagementSystem.enums.BookingStatus;
+import com.mitrais.rnd.FlightManagementSystem.enums.FlightStatus;
 import com.mitrais.rnd.FlightManagementSystem.exception.RouteErrorException;
 import com.mitrais.rnd.FlightManagementSystem.repository.RouteRepository;
+import com.mitrais.rnd.FlightManagementSystem.service.BookingService;
 import com.mitrais.rnd.FlightManagementSystem.service.RouteService;
 import com.mitrais.rnd.FlightManagementSystem.service.SeatService;
 import com.mitrais.rnd.FlightManagementSystem.service.SystemService;
-import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,8 +22,8 @@ import java.util.List;
 public class RouteServiceImpl implements RouteService {
 	private final RouteRepository repository;
 	private final SystemService systemService;
-	
 	private final SeatService seatService;
+	private final BookingService bookingService;
 	
 	@Override
 	public void addRoute(Route route) throws Exception {
@@ -42,10 +43,20 @@ public class RouteServiceImpl implements RouteService {
 		return routes;
 	}
 
-    @Override
-    public List<Route> getCurrentDayRoute() throws Exception {
+	@Override
+	@Transactional
+	public void updateRouteStatus(Route route, FlightStatus status) {
+		List<Seat> seats = seatService.getOccupiedSeatByRoute(route);
+		List<Booking> bookings = seats.stream().map(seat -> seat.getPassenger()).toList();
+		bookingService.updateBookingStatus(bookings, BookingStatus.ARRIVED);
+		route.setStatus(status.getCode());
+		repository.save(route);
+	}
+
+	@Override
+    public List<Route> getCurrentDayRoute(){
         SystemConfig currentSystemDay = systemService.getCurrentSystemDay();
         Integer currentDay = Integer.parseInt(currentSystemDay.getConfigValue());
-        return repository.findByFlightDay(currentDay);
+        return repository.findByFlightDayAndStatus(currentDay, FlightStatus.SCHEDULED.getCode());
     }
 }

@@ -34,4 +34,9 @@ public class SeatServiceImpl implements SeatService {
 	public Seat getAvailableSeat(Route route) throws NoSeatException {
 		return seatRepository.findFirstByRouteAndIsAvailableOrderByRouteAscIsAvailableAsc(route, true).orElseThrow(NoSeatException::new);
 	}
+
+	@Override
+	public List<Seat> getOccupiedSeatByRoute(Route route) {
+		return seatRepository.findByRouteIdAndIsAvailable(route.getId(),false);
+	}
 }
