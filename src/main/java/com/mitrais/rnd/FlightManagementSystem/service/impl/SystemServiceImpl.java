@@ -38,4 +38,18 @@ public class SystemServiceImpl implements SystemService {
         }
         return result;
     }
+
+    @Override
+    public void setBookingServiceStatus(Boolean status) {
+        repository.findByName(ConfigNameConstant.BOOKING_SERVICE).ifPresentOrElse(
+                systemConfig -> {
+                    systemConfig.setConfigValue(String.valueOf(status));
+                    repository.save(systemConfig);
+                },
+                () -> {
+                    SystemConfig bookingServiceConfig = new SystemConfig(null, ConfigNameConstant.BOOKING_SERVICE, String.valueOf(status));
+                    repository.save(bookingServiceConfig);
+                }
+        );
+    }
 }

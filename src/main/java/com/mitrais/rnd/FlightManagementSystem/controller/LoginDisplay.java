@@ -2,6 +2,7 @@ package com.mitrais.rnd.FlightManagementSystem.controller;
 
 import com.mitrais.rnd.FlightManagementSystem.constant.MenuText;
 import com.mitrais.rnd.FlightManagementSystem.controller.admin.AdminMenuDisplay;
+import com.mitrais.rnd.FlightManagementSystem.controller.passenger.PassengerMenuDisplay;
 import com.mitrais.rnd.FlightManagementSystem.service.SystemService;
 import com.mitrais.rnd.FlightManagementSystem.util.UserContextHolder;
 import com.mitrais.rnd.FlightManagementSystem.entity.AppUser;
@@ -15,13 +16,13 @@ import java.util.Scanner;
 @Controller
 @RequiredArgsConstructor
 public class LoginDisplay implements Displayable{
+    private String username;
+    private String password;
     private final AuthenticationService authenticationService;
     private final SystemService systemService;
     private final AdminMenuDisplay adminMenu;
     private final PassengerMenuDisplay passengerMenu;
-    private String username;
-    private String password;
-
+	
     @Override
     public void display() {
         System.out.println(MenuText.WELCOME_PROGRAM_BANNER);
@@ -37,15 +38,11 @@ public class LoginDisplay implements Displayable{
         try {
             AppUser user = authenticationService.login(username, password);
             UserContextHolder.setUserContext(user);
-            switch(user.getRole()){
-                case "ADMIN":{
-                    return adminMenu;
-                }
-                default:{
-                    return passengerMenu;
-                }
-            }
-        }catch (EntityNotFoundException e){
+			if (user.getRole().equals("ADMIN")) {
+				return adminMenu;
+			}
+			return passengerMenu;
+		}catch (EntityNotFoundException e){
             System.out.println(e.getMessage());
             return this;
         }

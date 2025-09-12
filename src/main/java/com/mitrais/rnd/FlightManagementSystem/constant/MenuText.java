@@ -1,18 +1,21 @@
 package com.mitrais.rnd.FlightManagementSystem.constant;
 
 import com.mitrais.rnd.FlightManagementSystem.entity.Aircraft;
+import com.mitrais.rnd.FlightManagementSystem.entity.Booking;
 import com.mitrais.rnd.FlightManagementSystem.entity.Route;
 import com.mitrais.rnd.FlightManagementSystem.entity.SystemConfig;
 import org.springframework.stereotype.Component;
 
 @Component
 public class MenuText {
-    private static final String ADMIN_MENU_DISPLAY = "Welcome, %s!\nPlease select menu\n1.Register Aircraft\n2.Register Destination \n3.Create Route\n4.System Operation";
-    private static final String PASSENGER_MENU_DISPLAY = "Welcome, %s!\nPlease select menu\n1.Book Flight\n2.My Bookings";
+    private static final String ADMIN_MENU_DISPLAY = "====== Flight Management System ======\nWelcome, %s!\nPlease select menu\n1.Register Aircraft\n2.Register Destination \n3.Create Route\n4.System Operation";
+    private static final String PASSENGER_MENU_DISPLAY = "====== Flight Management System ======\nWelcome, %s!\nPlease select menu\n1.Book Flight\n2.My Bookings";
     private static final String DESTINATION_SUCCESSFULLY_ADDED = "%s added as a destination!";
     private static final String SUCCESS_ADD_AIRCRAFT = "Aircraft %s with %s capacity is successfully saved!\n\n";
     private static final String CURRENT_DAY_DISPLAY = "Current day is now: %s";
     private static final String SUCCESS_ADD_ROUTE = "%s -> %s (Day %s with Aircraft %s) is successfully saved!";
+    private static final String BOOKING_CREATED = "\n====== Booking confirmed ======\nBooking Details\nBooking ID: %s\nDeparture: %s\nDestination: %s\nFlight Day: %s\nSeat number: %s \n";	
+    private static final String FLIGHT_CONFIRMATION = "You select %s -> %s (Day %s, %s seat(s) available). Are you sure you want to confirm this booking? (y/n) ";
     private static final String FLIGHT_SCHEDULE_TODAY = "Flight %s -> %s is scheduled for today.";
     private static final String RUNNING_FLIGHT_FOR_DAY = "Running Flight for day %s";
     private static final String SUCCESS_RUNNING_FLIGHT_FOR_DAY = "All flight for day %s have been completed successfully";
@@ -36,8 +39,17 @@ public class MenuText {
     public static final String AIRCRAFT_LIST = "Available Aircraft List: ";
     public static final String ENTER_DEPARTURE = "Enter Departure: ";
     public static final String ENTER_DAY = "Enter Day: ";
+    public static final String ENABLE_BOOKING_SERVICE = "Enabling booking service...";
+    public static final String SUCCESS_ENABLE_BOOKING_SERVICE = "Booking service enabled";
+    public static final String DISABLE_BOOKING_SERVICE = "Disabling booking service...";
+    public static final String SUCCESS_DISABLE_BOOKING_SERVICE = "Booking service disabled";
+    public static final String CREATE_BOOKING = "===== CREATE BOOKING =====\n";
+    public static final String SEARCH_FLIGHT = "Searching flight...";
+    public static final String FOUND_DIRECT_FLIGHTS = "Found Direct Flights: ";
+    public static final String FOUND_TRANSIT_FLIGHTS = "Found Transit Flights: ";
+    public static final String SELECT_FLIGHT = "Input selected flight (number): ";
+    public static final String SHOW_FLIGHT = "%s. %s -> %s (Day %s, %s available seats)";
     public static final String NO_FLIGHT_AVAILABLE_TODAY = "No flight scheduled for today";
-
     public static String getAdminMenuDisplayText(String name) {
         return String.format(ADMIN_MENU_DISPLAY, name);
     }
@@ -56,6 +68,18 @@ public class MenuText {
     public static String getSuccessAddRoute(Route route) {
         return String.format(SUCCESS_ADD_ROUTE, route.getFromDestination().getName(), route.getToDestination().getName(), route.getFlightDay(), route.getAircraft().getName());
     }
+	
+	public static String getFlightConfirmation(String departure, String destination, int day, int seat) {
+		return String.format(FLIGHT_CONFIRMATION, departure, destination, day, seat);
+	}
+	
+	public static String getSuccessBookingText(Booking booking){
+		return String.format(BOOKING_CREATED, booking.getBooking_id(), booking.getFromDestination().getName(), booking.getToDestination().getName(), booking.getFlightDay(), booking.getSeat().getSeatNumber());
+	}
+	
+	public static String getShowFlight(int index, Route route) {
+		return String.format(SHOW_FLIGHT, index, route.getFromDestination().getName(), route.getToDestination().getName(), route.getFlightDay(), route.getAvailableSeats());
+	}
 
     public static String getCurrentDayDisplay(SystemConfig currentSystemDay){
         return String.format(CURRENT_DAY_DISPLAY, currentSystemDay.getConfigValue());

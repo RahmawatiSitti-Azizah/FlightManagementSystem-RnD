@@ -8,7 +8,8 @@ import lombok.Getter;
 public enum SystemOperationsOptions {
     ADVANCE_DAY( "1","Advance to next day"),
     RUN_FLIGHT( "2","Run Flight"),
-    ENABLE_DISABLE_BOOKING( "3","Enable/Disable Booking Service"),
+    ENABLE_BOOKING( "3","Enable Booking Service"),
+    DISABLE_BOOKING( "4","Disable Booking Service"),
     BACK_TO_MAIN_MENU("0","Back to Admin menu");
 
     private final String code;
