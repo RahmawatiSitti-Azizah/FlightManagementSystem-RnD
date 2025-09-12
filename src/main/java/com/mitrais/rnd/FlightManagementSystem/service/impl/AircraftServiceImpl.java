@@ -2,7 +2,6 @@ package com.mitrais.rnd.FlightManagementSystem.service.impl;
 
 import com.mitrais.rnd.FlightManagementSystem.constant.ErrorMesssageConstant;
 import com.mitrais.rnd.FlightManagementSystem.entity.Aircraft;
-import com.mitrais.rnd.FlightManagementSystem.entity.Destination;
 import com.mitrais.rnd.FlightManagementSystem.repository.AircraftRepository;
 
 import com.mitrais.rnd.FlightManagementSystem.service.AircraftService;
@@ -29,6 +28,6 @@ public class AircraftServiceImpl implements AircraftService {
 
     @Override
     public Aircraft getAircraftByName(String name) throws EntityNotFoundException {
-        return repository.findByName(name).orElseThrow(() -> new EntityNotFoundException(ErrorMesssageConstant.showErrorInput("Aircraft")));
+        return repository.findByNameIgnoreCase(name).orElseThrow(() -> new EntityNotFoundException(ErrorMesssageConstant.showErrorInput("Aircraft")));
     }
 }

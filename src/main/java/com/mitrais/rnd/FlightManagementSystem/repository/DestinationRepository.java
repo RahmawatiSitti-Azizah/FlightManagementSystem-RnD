@@ -7,5 +7,5 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface DestinationRepository extends JpaRepository<Destination, UUID> {
-    Optional<Destination> findByName(String name);
+    Optional<Destination> findByNameIgnoreCase(String name);
 }

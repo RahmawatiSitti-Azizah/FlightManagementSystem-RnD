@@ -7,6 +7,7 @@ import com.mitrais.rnd.FlightManagementSystem.controller.Displayable;
 import com.mitrais.rnd.FlightManagementSystem.entity.Booking;
 import com.mitrais.rnd.FlightManagementSystem.entity.Route;
 import com.mitrais.rnd.FlightManagementSystem.exception.BookingNotConfirmedException;
+import com.mitrais.rnd.FlightManagementSystem.exception.ContraintBookingDayException;
 import com.mitrais.rnd.FlightManagementSystem.exception.NoSeatException;
 import com.mitrais.rnd.FlightManagementSystem.handler.ChooseFlightHandler;
 import com.mitrais.rnd.FlightManagementSystem.handler.SearchFlightHandler;
@@ -97,9 +98,9 @@ public class BookingFlightDisplay implements Displayable {
 			}
 		} catch (BookingNotConfirmedException e) {
 			return backMenuDisplay;
-		} catch (NoSeatException e) {
+		} catch (NoSeatException | ContraintBookingDayException e) {
 			return proceedToNextDisplay();
 		}
-        return backMenuDisplay;
+		return backMenuDisplay;
     }
 }

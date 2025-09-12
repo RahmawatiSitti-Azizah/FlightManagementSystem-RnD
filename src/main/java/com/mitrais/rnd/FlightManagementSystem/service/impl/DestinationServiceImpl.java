@@ -18,7 +18,7 @@ public class DestinationServiceImpl implements DestinationService {
     private final DestinationRepository repository;
     @Override
     public void save(String name) throws EntityExistsException {
-        if(repository.findByName(name).isPresent()){
+        if(repository.findByNameIgnoreCase(name).isPresent()){
             throw new EntityExistsException(ErrorMesssageConstant.DESTINATION_ALREADY_EXISTS);
         }
         repository.save(new Destination(null, name, UserContextHolder.getUserContext().getId()));
@@ -31,6 +31,6 @@ public class DestinationServiceImpl implements DestinationService {
 
     @Override
     public Destination getDestinationCityByName(String name) throws EntityNotFoundException {
-        return repository.findByName(name).orElseThrow(() -> new EntityNotFoundException(ErrorMesssageConstant.showErrorInput("City")));
+        return repository.findByNameIgnoreCase(name).orElseThrow(() -> new EntityNotFoundException(ErrorMesssageConstant.showErrorInput("City")));
     }
 }
