@@ -22,6 +22,6 @@ public class Seat {
 	@JoinColumn(name="route_id", nullable = true)
 	private Route route;
 	private int seatNumber;
-	@Column(columnDefinition = "true")
+	@Column(columnDefinition = "boolean default true")
 	private boolean isAvailable;
 }

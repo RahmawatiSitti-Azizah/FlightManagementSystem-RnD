@@ -5,8 +5,10 @@ import com.mitrais.rnd.FlightManagementSystem.constant.MenuText;
 import com.mitrais.rnd.FlightManagementSystem.controller.Displayable;
 import com.mitrais.rnd.FlightManagementSystem.entity.Booking;
 import com.mitrais.rnd.FlightManagementSystem.entity.Route;
-import com.mitrais.rnd.FlightManagementSystem.exception.BookingNotComfirmedException;
+import com.mitrais.rnd.FlightManagementSystem.exception.BookingNotConfirmedException;
 import com.mitrais.rnd.FlightManagementSystem.exception.NoSeatException;
+import com.mitrais.rnd.FlightManagementSystem.handler.ChooseFlightHandler;
+import com.mitrais.rnd.FlightManagementSystem.handler.SearchFlightHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Controller;
@@ -29,7 +31,7 @@ public class BookingFlightDisplay implements Displayable {
 		return chooseFlightHandler.scanFlightOption(availableRoutes, scanner);
 	}
 	
-	private Route chooseFlight(List<Route> availableRoutes, Scanner scanner) throws BookingNotComfirmedException {
+	private Route chooseFlight(List<Route> availableRoutes, Scanner scanner) throws BookingNotConfirmedException {
 		Route chosenRoute = chooseRoute(availableRoutes, scanner);
 		if (chooseFlightHandler.confirmSelectedFlight(chosenRoute, scanner)) {
 			try {
@@ -39,7 +41,7 @@ public class BookingFlightDisplay implements Displayable {
 				return chooseFlight(availableRoutes, scanner);
 			}
 		} else {
-			throw new BookingNotComfirmedException();
+			throw new BookingNotConfirmedException();
 		}
 	}
 
@@ -61,7 +63,7 @@ public class BookingFlightDisplay implements Displayable {
 			Booking booking = chooseFlightHandler.createBooking(chosenFlight);
 			
 			System.out.println(MenuText.getSuccessBookingText(booking));
-		} catch (BookingNotComfirmedException e) {
+		} catch (BookingNotConfirmedException e) {
 			return backMenuDisplay;
 		} catch (NoSeatException e) {
 			return proceedToNextDisplay();

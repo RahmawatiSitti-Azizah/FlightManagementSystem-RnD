@@ -1,8 +1,7 @@
-package com.mitrais.rnd.FlightManagementSystem.controller.passenger;
+package com.mitrais.rnd.FlightManagementSystem.handler;
 
 import com.mitrais.rnd.FlightManagementSystem.constant.ErrorMesssageConstant;
 import com.mitrais.rnd.FlightManagementSystem.constant.MenuText;
-import com.mitrais.rnd.FlightManagementSystem.entity.Aircraft;
 import com.mitrais.rnd.FlightManagementSystem.entity.Destination;
 import com.mitrais.rnd.FlightManagementSystem.entity.Route;
 import com.mitrais.rnd.FlightManagementSystem.service.BookingService;

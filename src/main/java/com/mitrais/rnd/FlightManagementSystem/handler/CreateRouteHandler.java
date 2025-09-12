@@ -1,4 +1,4 @@
-package com.mitrais.rnd.FlightManagementSystem.controller.admin;
+package com.mitrais.rnd.FlightManagementSystem.handler;
 
 import com.mitrais.rnd.FlightManagementSystem.constant.ErrorMesssageConstant;
 import com.mitrais.rnd.FlightManagementSystem.constant.MenuText;

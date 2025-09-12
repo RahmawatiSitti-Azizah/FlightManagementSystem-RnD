@@ -38,7 +38,6 @@ public class LoginDisplay implements Displayable{
         try {
             AppUser user = authenticationService.login(username, password);
             UserContextHolder.setUserContext(user);
-			System.out.println(user.getRole());
 			if (user.getRole().equals("ADMIN")) {
 				return adminMenu;
 			}
