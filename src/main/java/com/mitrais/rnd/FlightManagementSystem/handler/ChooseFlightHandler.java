@@ -4,6 +4,7 @@ import com.mitrais.rnd.FlightManagementSystem.constant.ErrorMesssageConstant;
 import com.mitrais.rnd.FlightManagementSystem.constant.MenuText;
 import com.mitrais.rnd.FlightManagementSystem.entity.Booking;
 import com.mitrais.rnd.FlightManagementSystem.entity.Route;
+import com.mitrais.rnd.FlightManagementSystem.exception.ContraintBookingDayException;
 import com.mitrais.rnd.FlightManagementSystem.exception.NoSeatException;
 import com.mitrais.rnd.FlightManagementSystem.service.BookingService;
 import lombok.AllArgsConstructor;
@@ -74,10 +75,10 @@ public class ChooseFlightHandler {
 		return input.equals("y");
 	}
 	
-	public Booking createBooking(Route route) throws NoSeatException {
+	public Booking createBooking(Route route) throws NoSeatException, ContraintBookingDayException {
 		try {
 			return bookingService.createBooking(route);
-		} catch (NoSeatException e) {
+		} catch (NoSeatException | ContraintBookingDayException e) {
 			System.out.println(e.getMessage());
 			throw e;
 		} catch (DuplicateKeyException e) {
@@ -86,10 +87,10 @@ public class ChooseFlightHandler {
 		}
 	}
 
-	public Booking[] createBooking(Route[] route) throws NoSeatException {
+	public Booking[] createBooking(Route[] route) throws NoSeatException, ContraintBookingDayException {
 		try {
 			return bookingService.createBooking(route);
-		} catch (NoSeatException e) {
+		} catch (NoSeatException | ContraintBookingDayException e) {
 			System.out.println(e.getMessage());
 			throw e;
 		} catch (DuplicateKeyException e) {

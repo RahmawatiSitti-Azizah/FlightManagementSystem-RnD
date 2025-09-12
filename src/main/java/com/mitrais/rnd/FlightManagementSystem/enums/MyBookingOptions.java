@@ -6,7 +6,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum MyBookingOptions {
-    DELETE( "1", "Delete Booking"),
+    DELETE( "1", "\nDelete Booking"),
     NO_OPTIONS("0","Back to passenger menu");
 
     private final String code;

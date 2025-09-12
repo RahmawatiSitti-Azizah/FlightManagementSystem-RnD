@@ -9,6 +9,7 @@ public class ErrorMesssageConstant {
     public static final String TRANSIT_ROUTE_NOT_FOUND = "Transit route not found.";
 	
 	public static final String NO_SEAT_AVAILABLE = "No seats available on this flight. Please select other flight";
+	public static final String CONSTRAINT_BOOKING_DAY_ERROR = "Booking must be made at least one day before the scheduled day.\n";
 
     public static String showErrorInput(String column) {
         return String.format(ERROR_INPUT, column, column);
