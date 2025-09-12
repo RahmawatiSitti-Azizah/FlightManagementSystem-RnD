@@ -22,12 +22,10 @@ public class Booking {
     private UUID id;
     @Column(unique = true)
     private String booking_id;
+    private String transit_booking_id;
     @OneToOne
     @JoinColumn(name = "aircraft_id", nullable = true)
     private Aircraft aircraft;
-    @OneToOne
-    @JoinColumn(name = "transit_destination_id", nullable = true)
-    private Destination transitDestination;
     @OneToOne
     @JoinColumn(name = "from_destination_id", nullable = true)
     private Destination fromDestination;

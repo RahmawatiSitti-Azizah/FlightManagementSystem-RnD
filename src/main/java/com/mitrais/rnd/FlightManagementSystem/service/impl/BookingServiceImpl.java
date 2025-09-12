@@ -14,7 +14,9 @@ import com.mitrais.rnd.FlightManagementSystem.util.BookingIdGenerator;
 import com.mitrais.rnd.FlightManagementSystem.util.ObjectTransformer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -61,5 +63,19 @@ public class BookingServiceImpl implements BookingService {
 		bookings = bookings.stream().map(booking -> {booking.setBooking_id(status.getCode());
 		return booking;}).toList();
 		bookingRepository.saveAll(bookings);
+	}
+
+	@Override
+	@Transactional
+	public Booking[] createBooking(Route[] routes) throws NoSeatException {
+		Booking[] result = new Booking[2];
+		int index = 0;
+		for(Route route : routes){
+			result [index++] = createBooking(route);
+		}
+		result[0].setTransit_booking_id(result[1].getBooking_id());
+		result[1].setTransit_booking_id(result[0].getBooking_id());
+		bookingRepository.saveAll(Arrays.asList(result));
+		return result;
 	}
 }

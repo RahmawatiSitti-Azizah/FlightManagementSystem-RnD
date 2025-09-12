@@ -56,5 +56,6 @@ public class RunFlightDisplay implements Displayable {
             System.out.println(MenuText.getPassengerListText(passenger.getUser().getName(),String.valueOf(passenger.getSeat().getSeatNumber())));
         }
         System.out.println(MenuText.getProcessFlight());
+
     }
 }

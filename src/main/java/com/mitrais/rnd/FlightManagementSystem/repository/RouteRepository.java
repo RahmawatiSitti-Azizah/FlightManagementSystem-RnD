@@ -11,5 +11,7 @@ import java.util.UUID;
 public interface RouteRepository extends JpaRepository<Route, UUID> {
     public List<Route> findByFlightDayAndStatus(int flightDay, String status);
 	@Query("SELECT r FROM Route r WHERE r.fromDestination.id = :departureId AND r.toDestination.id = :destinationId")
-    Optional<List<Route>> findByFromDestinationToDestination(UUID departureId, UUID destinationId);
+    List<Route> findByFromDestinationToDestination(UUID departureId, UUID destinationId);
+    List<Route> findByFromDestinationId(UUID id);
+    List<Route> findByToDestinationId(UUID id);
 }

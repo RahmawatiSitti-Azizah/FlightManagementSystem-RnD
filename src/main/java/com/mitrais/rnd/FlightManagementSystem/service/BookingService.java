@@ -11,4 +11,5 @@ public interface BookingService {
     public Booking createBooking(Route route) throws NoSeatException;
     public List<Booking> getListBookingByRoute(Route route);
     public void updateBookingStatus(List<Booking> bookings, BookingStatus status);
+    public Booking[] createBooking(Route[] route) throws NoSeatException;
 }

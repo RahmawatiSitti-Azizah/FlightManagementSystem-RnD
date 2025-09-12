@@ -49,15 +49,14 @@ create table if not exists booking (
     status varchar(255) not null,
     aircraft_id uuid,
     from_destination_id uuid,
-    transit_destination_id uuid,
     to_destination_id uuid,
     flight_day integer not null,
+    transit_booking_id varchar(255),
     user_id uuid,
     primary key (id),
     foreign key (aircraft_id) references aircraft(id),
     foreign key (seat_id) references seat(id),
     foreign key (from_destination_id) references destination(id),
-    foreign key (transit_destination_id) references destination(id),
     foreign key (to_destination_id) references destination(id),
     foreign key (user_id) references app_user(id),
     unique(aircraft_id, transit_destination_id, from_destination_id, to_destination_id, flight_day, user_id)
@@ -71,3 +70,6 @@ create table if not exists system_config (
 );
 
 ALTER TABLE destination ADD COLUMN IF NOT EXISTS created_by uuid;
+ALTER TABLE booking DROP CONSTRAINT transit_destination_id;
+ALTER TABLE booking DROP COLUMN transit_destination_id;
+ALTER TABLE booking ADD COLUMN IF NOT EXISTS transit_booking_id varchar(255);
