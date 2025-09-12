@@ -79,12 +79,16 @@ public class BookingFlightDisplay implements Displayable {
 		Scanner scanner = new Scanner(System.in);
 		try {
 			if(availableDirectRoutes.isEmpty()){
-				System.out.print(ErrorMesssageConstant.ROUTE_NOT_FOUND);
+				System.out.print(ErrorMesssageConstant.DIRECT_ROUTE_NOT_FOUND);
 				List<Route[]> transitRoute = searchFlightHandler.searchForTransitFlights();
-				Route[] routes = chooseTransitRoute(transitRoute,scanner);
-				Booking[] bookings = chooseFlightHandler.createBooking(routes);
-				for (Booking booking: bookings){
-					System.out.println(MenuText.getSuccessBookingText(booking));
+				if(!transitRoute.isEmpty()) {
+					Route[] routes = chooseTransitRoute(transitRoute, scanner);
+					Booking[] bookings = chooseFlightHandler.createBooking(routes);
+					for (Booking booking : bookings) {
+						System.out.println(MenuText.getSuccessBookingText(booking));
+					}
+				}else{
+					System.out.println(ErrorMesssageConstant.TRANSIT_ROUTE_NOT_FOUND);
 				}
 			}else {
 				Route chosenFlight = chooseFlight(availableDirectRoutes, scanner);
@@ -96,7 +100,6 @@ public class BookingFlightDisplay implements Displayable {
 		} catch (NoSeatException e) {
 			return proceedToNextDisplay();
 		}
-
         return backMenuDisplay;
     }
 }

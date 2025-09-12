@@ -1,6 +1,7 @@
 package com.mitrais.rnd.FlightManagementSystem.controller.admin;
 
 import com.mitrais.rnd.FlightManagementSystem.controller.Displayable;
+import com.mitrais.rnd.FlightManagementSystem.enums.PassengerOptions;
 import com.mitrais.rnd.FlightManagementSystem.util.UserContextHolder;
 import com.mitrais.rnd.FlightManagementSystem.enums.AdminOptions;
 import com.mitrais.rnd.FlightManagementSystem.constant.MenuText;
@@ -23,6 +24,9 @@ public class AdminMenuDisplay implements Displayable {
     @Override
     public void display() {
         System.out.println(MenuText.getAdminMenuDisplayText(UserContextHolder.getUserContext().getName()));
+        for (AdminOptions menu: AdminOptions.values()){
+            System.out.println(menu);
+        }
     }
 
     private Displayable getNextDisplay() {

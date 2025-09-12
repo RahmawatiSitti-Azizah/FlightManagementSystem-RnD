@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MenuText {
-    private static final String ADMIN_MENU_DISPLAY = "====== Flight Management System ======\nWelcome, %s!\nPlease select menu\n1.Register Aircraft\n2.Register Destination \n3.Create Route\n4.System Operation";
+    private static final String ADMIN_MENU_DISPLAY = "====== Flight Management System ======\nWelcome, %s!\nPlease select menu";
     private static final String PASSENGER_MENU_DISPLAY = "====== Flight Management System ======\nWelcome, %s!\nPlease select menu";
     private static final String DESTINATION_SUCCESSFULLY_ADDED = "%s added as a destination!";
     private static final String SUCCESS_ADD_AIRCRAFT = "Aircraft %s with %s capacity is successfully saved!\n\n";
@@ -24,6 +24,7 @@ public class MenuText {
     private static final String PASSENGER_BOARDING = "Passenger boarding : %d";
     private static final String PASSENGER_LIST_TEXT = "- %s (seat %s)";
     private static final String FLIGHT_STATUS_CHANGE = "Flight status : %s\nFlight status : %s";
+    private static final String MY_FLIGHT_DISPLAY = "%d. %s: %s -> %s on day %s, Seat %s";
     public static final String WELCOME_PROGRAM_BANNER = "---------------------------------------\nWelcome to RnD Flight Management System\n---------------------------------------";
     public static final String REGISTER_AIRCRAFT_HEADER = "===== REGISTER AIRCRAFT =====\n";
     public static final String ADD_DESTINATION_HEADER = "===== ADD DESTINATION =====";
@@ -54,6 +55,9 @@ public class MenuText {
     public static final String SHOW_TRANSIT_FLIGHT = "%s. %s -> %s (Day %s, %s available seats) %s -> %s (Day %s, %s available seats)";
     public static final String NO_FLIGHT_AVAILABLE_TODAY = "No flight scheduled for today";
     public static final String CONFIRM_THIS_BOOKING_MESSAGE = "Are you sure you want to confirm this booking? (y/n) ";
+    public static final String YOUR_BOOKING = "Your booking list";
+    public static final String ENTER_BOOKING_ID_TO_CANCEL = "Enter booking id to cancel : ";
+    public static final String BOOKING_ID_NOT_FOUND = "Booking id not found";
 
     public static String getAdminMenuDisplayText(String name) {
         return String.format(ADMIN_MENU_DISPLAY, name);
@@ -73,15 +77,15 @@ public class MenuText {
     public static String getSuccessAddRoute(Route route) {
         return String.format(SUCCESS_ADD_ROUTE, route.getFromDestination().getName(), route.getToDestination().getName(), route.getFlightDay(), route.getAircraft().getName());
     }
-	
+
 	public static String getFlightConfirmation(String departure, String destination, int day, int seat) {
 		return String.format(FLIGHT_CONFIRMATION, departure, destination, day, seat);
 	}
-	
+
 	public static String getSuccessBookingText(Booking booking){
 		return String.format(BOOKING_CREATED, booking.getBooking_id(), booking.getFromDestination().getName(), booking.getToDestination().getName(), booking.getFlightDay(), booking.getSeat().getSeatNumber());
 	}
-	
+
 	public static String getShowFlight(int index, Route route) {
 		return String.format(SHOW_FLIGHT, index, route.getFromDestination().getName(), route.getToDestination().getName(), route.getFlightDay(), route.getAvailableSeats());
 	}
@@ -125,5 +129,9 @@ public class MenuText {
 
     public static String getPassengerListText(String passengerName, String passengerSeat){
         return String.format(PASSENGER_LIST_TEXT,passengerName,passengerSeat);
+    }
+
+    public static String getMyFlightDisplay(int index, Booking booking){
+        return String.format(MY_FLIGHT_DISPLAY, index, booking.getBooking_id(), booking.getFromDestination().getName(), booking.getToDestination().getName(), booking.getSeat().getRoute().getFlightDay(),booking.getSeat().getSeatNumber());
     }
 }

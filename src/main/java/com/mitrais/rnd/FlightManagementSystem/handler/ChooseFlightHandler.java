@@ -27,7 +27,7 @@ public class ChooseFlightHandler {
 	}
 
 	public void showTransitRoutes(List<Route[]> routes) {
-		System.out.println(MenuText.FOUND_DIRECT_FLIGHTS);
+		System.out.println(MenuText.FOUND_TRANSIT_FLIGHTS);
 		int index=0;
 		for (Route[] route: routes) {
 			System.out.println(MenuText.getShowTransitFlight(++index, route));

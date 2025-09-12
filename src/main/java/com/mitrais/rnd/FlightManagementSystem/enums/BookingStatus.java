@@ -6,11 +6,9 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum BookingStatus {
-	ISSUED( "issued"),
-	TRANSIT( "transit"),
+	CREATED( "created"),
 	ARRIVED( "arrived"),
-	CANCELED("canceled"),
-	NO_OPTIONS("0");
+	CANCELED("canceled");
 	
 	private final String code;
 	
@@ -20,6 +18,6 @@ public enum BookingStatus {
 				return option;
 			}
 		}
-		return BookingStatus.NO_OPTIONS;
+		return null;
 	}
 }

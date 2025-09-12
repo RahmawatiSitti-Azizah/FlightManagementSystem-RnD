@@ -15,6 +15,7 @@ import java.util.Scanner;
 @RequiredArgsConstructor
 public class PassengerMenuDisplay implements Displayable {
 	private final BookingFlightDisplay bookingFlightDisplay;
+    private final MyBookingDisplay myBookingDisplay;
     @Setter
     private Displayable backMenu;
 
@@ -24,6 +25,7 @@ public class PassengerMenuDisplay implements Displayable {
         for (PassengerOptions menu: PassengerOptions.values()){
             System.out.println(menu);
         }
+        System.out.print(MenuText.SELECT_MENU_TEXT);
     }
 
     private Displayable manageMenu() {
@@ -35,13 +37,12 @@ public class PassengerMenuDisplay implements Displayable {
 				bookingFlightDisplay.setBackMenuDisplay(this);
 				return bookingFlightDisplay;
             case MY_BOOKING:
-                System.out.println("my booking");
-                break;
+                myBookingDisplay.setBackMenu(this);
+                return myBookingDisplay;
             default:
                 UserContextHolder.setUserContext(null);
                 return backMenu;
         }
-        return this;
     }
 
     @Override
