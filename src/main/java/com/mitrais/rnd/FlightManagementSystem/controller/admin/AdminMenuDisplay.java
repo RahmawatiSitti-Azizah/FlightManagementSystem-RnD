@@ -5,6 +5,7 @@ import com.mitrais.rnd.FlightManagementSystem.util.UserContextHolder;
 import com.mitrais.rnd.FlightManagementSystem.enums.AdminOptions;
 import com.mitrais.rnd.FlightManagementSystem.constant.MenuText;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.stereotype.Controller;
 
 import java.util.Scanner;
@@ -16,6 +17,8 @@ public class AdminMenuDisplay implements Displayable {
     private final RegisterAircraftDisplay registerAircraftDisplayScreen;
     private final CreateRouteDisplay createRouteDisplay;
     private final SystemOperationDisplay systemOperationDisplay;
+    @Setter
+    private Displayable backMenu;
 
     @Override
     public void display() {
@@ -44,11 +47,9 @@ public class AdminMenuDisplay implements Displayable {
                 return systemOperationDisplay;
             }
             default: {
-                System.out.println("Invalid menu");
-                break;
+                return backMenu;
             }
         }
-        return this;
     }
 
     @Override

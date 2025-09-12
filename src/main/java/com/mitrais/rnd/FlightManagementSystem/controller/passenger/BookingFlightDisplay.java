@@ -1,6 +1,7 @@
 package com.mitrais.rnd.FlightManagementSystem.controller.passenger;
 
 
+import com.mitrais.rnd.FlightManagementSystem.constant.ErrorMesssageConstant;
 import com.mitrais.rnd.FlightManagementSystem.constant.MenuText;
 import com.mitrais.rnd.FlightManagementSystem.controller.Displayable;
 import com.mitrais.rnd.FlightManagementSystem.entity.Booking;
@@ -30,6 +31,11 @@ public class BookingFlightDisplay implements Displayable {
 		chooseFlightHandler.showDirectRoutes(availableRoutes);
 		return chooseFlightHandler.scanFlightOption(availableRoutes, scanner);
 	}
+
+	private Route[] chooseTransitRoute(List<Route[]> availableRoutes, Scanner scanner) {
+		chooseFlightHandler.showTransitRoutes(availableRoutes);
+		return chooseFlightHandler.scanTransitFlightOption(availableRoutes, scanner);
+	}
 	
 	private Route chooseFlight(List<Route> availableRoutes, Scanner scanner) throws BookingNotConfirmedException {
 		Route chosenRoute = chooseRoute(availableRoutes, scanner);
@@ -39,6 +45,20 @@ public class BookingFlightDisplay implements Displayable {
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 				return chooseFlight(availableRoutes, scanner);
+			}
+		} else {
+			throw new BookingNotConfirmedException();
+		}
+	}
+
+	private Route[] chooseTransitFlight(List<Route[]> availableRoutes, Scanner scanner) throws BookingNotConfirmedException {
+		Route[] chosenRoute = chooseTransitRoute(availableRoutes, scanner);
+		if (chooseFlightHandler.confirmSelectedTransitFlight(chosenRoute, scanner)) {
+			try {
+				return chosenRoute;
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				return chooseTransitFlight(availableRoutes, scanner);
 			}
 		} else {
 			throw new BookingNotConfirmedException();
@@ -55,14 +75,22 @@ public class BookingFlightDisplay implements Displayable {
     public Displayable proceedToNextDisplay() {
         display();
 
-        List<Route> availableRoutes = searchFlightHandler.searchForFlight();
+        List<Route> availableDirectRoutes = searchFlightHandler.searchForFlight();
 		Scanner scanner = new Scanner(System.in);
-		
 		try {
-			Route chosenFlight = chooseFlight(availableRoutes, scanner);
-			Booking booking = chooseFlightHandler.createBooking(chosenFlight);
-			
-			System.out.println(MenuText.getSuccessBookingText(booking));
+			if(availableDirectRoutes.isEmpty()){
+				System.out.print(ErrorMesssageConstant.ROUTE_NOT_FOUND);
+				List<Route[]> transitRoute = searchFlightHandler.searchForTransitFlights();
+				Route[] routes = chooseTransitRoute(transitRoute,scanner);
+				Booking[] bookings = chooseFlightHandler.createBooking(routes);
+				for (Booking booking: bookings){
+					System.out.println(MenuText.getSuccessBookingText(booking));
+				}
+			}else {
+				Route chosenFlight = chooseFlight(availableDirectRoutes, scanner);
+				Booking booking = chooseFlightHandler.createBooking(chosenFlight);
+				System.out.println(MenuText.getSuccessBookingText(booking));
+			}
 		} catch (BookingNotConfirmedException e) {
 			return backMenuDisplay;
 		} catch (NoSeatException e) {

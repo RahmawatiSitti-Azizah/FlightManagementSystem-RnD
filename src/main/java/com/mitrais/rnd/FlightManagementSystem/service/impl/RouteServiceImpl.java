@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -35,11 +36,8 @@ public class RouteServiceImpl implements RouteService {
 	}
 	
 	@Override
-	public List<Route> findRouteByDepartureDestination(Destination departure, Destination destination) throws EntityNotFoundException {
-		List<Route> routes = repository.findByFromDestinationToDestination(departure.getId(), destination.getId()).orElseThrow();
-		if (routes.isEmpty()) {
-			throw new EntityNotFoundException((ErrorMesssageConstant.ROUTE_NOT_FOUND));
-		}
+	public List<Route> findRouteByDepartureDestination(Destination departure, Destination destination){
+		List<Route> routes = repository.findByFromDestinationToDestination(departure.getId(), destination.getId());
 		return routes;
 	}
 
@@ -51,6 +49,22 @@ public class RouteServiceImpl implements RouteService {
 		bookingService.updateBookingStatus(bookings, BookingStatus.ARRIVED);
 		route.setStatus(status.getCode());
 		repository.save(route);
+	}
+
+	@Override
+	public List<Route[]> findRouteTransitByDepartureDestination(Destination departure, Destination destination) {
+		List<Route> departureTransitRoute = repository.findByFromDestinationId(departure.getId());
+		List<Route> destinationTransitRoute = repository.findByToDestinationId(destination.getId());
+		List<Route[]> transitRoutesList = departureTransitRoute.stream()
+				.map(departureRoute -> new Route[] {
+						departureRoute,
+						destinationTransitRoute.stream()
+								.filter(destinationRoute -> departureRoute.getToDestination().getId().equals(destinationRoute.getFromDestination().getId()))
+								.findFirst()
+								.orElse(null)
+				})
+				.toList();
+		return transitRoutesList;
 	}
 
 	@Override

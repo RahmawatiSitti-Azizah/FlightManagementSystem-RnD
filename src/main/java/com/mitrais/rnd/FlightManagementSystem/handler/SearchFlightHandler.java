@@ -4,22 +4,27 @@ import com.mitrais.rnd.FlightManagementSystem.constant.ErrorMesssageConstant;
 import com.mitrais.rnd.FlightManagementSystem.constant.MenuText;
 import com.mitrais.rnd.FlightManagementSystem.entity.Destination;
 import com.mitrais.rnd.FlightManagementSystem.entity.Route;
+import com.mitrais.rnd.FlightManagementSystem.exception.BookingNotConfirmedException;
 import com.mitrais.rnd.FlightManagementSystem.service.BookingService;
 import com.mitrais.rnd.FlightManagementSystem.service.DestinationService;
 import com.mitrais.rnd.FlightManagementSystem.service.RouteService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Component
 public class SearchFlightHandler {
     private final BookingService bookingService;
     private final DestinationService destinationService;
     private final RouteService routeService;
+    private Destination departure;
+    private Destination destination;
 
     public void showCreateBooking() {
         showDestinationList();
@@ -75,21 +80,25 @@ public class SearchFlightHandler {
         }
     }
 
-    private List<Route> findFlights(Destination departure, Destination destination) {
-       try {
+    private List<Route> findFlights(Destination departure, Destination destination){
            return routeService.findRouteByDepartureDestination(departure, destination);
-       } catch (Exception e) {
-           System.out.println(e.getMessage());
-           return searchForFlight();
-       }
     }
 
-    public List<Route> searchForFlight() {
+    public List<Route> searchForFlight(){
         Scanner scanner = new Scanner(System.in);
-        Destination departure = scanDeparture(scanner);
-        Destination destination = scanDestination(scanner);
+        departure = scanDeparture(scanner);
+        destination = scanDestination(scanner);
 
         System.out.println(MenuText.SEARCH_FLIGHT);
         return findFlights(departure, destination);
+    }
+
+    public List<Route[]> searchForTransitFlights() throws BookingNotConfirmedException{
+        Scanner scanner = new Scanner(System.in);
+        if(scanner.nextLine().equalsIgnoreCase("y")) {
+            return routeService.findRouteTransitByDepartureDestination(departure, destination);
+        }else{
+            throw new BookingNotConfirmedException();
+        }
     }
 }

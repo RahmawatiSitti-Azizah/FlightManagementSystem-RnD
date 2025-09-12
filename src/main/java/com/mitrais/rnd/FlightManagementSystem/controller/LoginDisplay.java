@@ -39,8 +39,10 @@ public class LoginDisplay implements Displayable{
             AppUser user = authenticationService.login(username, password);
             UserContextHolder.setUserContext(user);
 			if (user.getRole().equals("ADMIN")) {
+                adminMenu.setBackMenu(this);
 				return adminMenu;
 			}
+            passengerMenu.setBackMenu(this);
 			return passengerMenu;
 		}catch (EntityNotFoundException e){
             System.out.println(e.getMessage());

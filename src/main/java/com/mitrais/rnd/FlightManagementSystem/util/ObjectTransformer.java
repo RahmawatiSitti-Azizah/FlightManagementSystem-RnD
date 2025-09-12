@@ -9,6 +9,6 @@ import com.mitrais.rnd.FlightManagementSystem.enums.BookingStatus;
 public class ObjectTransformer {
 	public static Booking bookingFromRoute (String bookingId, Route route, Seat assignedSeat) {
 		AppUser user = UserContextHolder.getUserContext();
-		return new Booking(null, bookingId, route.getAircraft(), null, route.getFromDestination(), route.getToDestination(), route.getFlightDay(), BookingStatus.ISSUED.name(), assignedSeat, user);
+		return new Booking(null, bookingId, null, route.getAircraft(), route.getFromDestination(), route.getToDestination(), route.getFlightDay(), BookingStatus.ISSUED.name(), assignedSeat, user);
 	}
 }

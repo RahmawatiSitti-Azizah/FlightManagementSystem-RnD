@@ -25,6 +25,14 @@ public class ChooseFlightHandler {
 			System.out.println(MenuText.getShowFlight(++index, route));
 		}
 	}
+
+	public void showTransitRoutes(List<Route[]> routes) {
+		System.out.println(MenuText.FOUND_DIRECT_FLIGHTS);
+		int index=0;
+		for (Route[] route: routes) {
+			System.out.println(MenuText.getShowTransitFlight(++index, route));
+		}
+	}
 	
 	public Route scanFlightOption(List<Route> routes, Scanner scanner) {
 		System.out.print(MenuText.SELECT_FLIGHT);
@@ -37,9 +45,31 @@ public class ChooseFlightHandler {
 			return scanFlightOption(routes, scanner);
 		}
 	}
+
+	public Route[] scanTransitFlightOption(List<Route[]> routes, Scanner scanner) {
+		System.out.print(MenuText.SELECT_FLIGHT);
+
+		try {
+			int routeIndex = Integer.parseInt(scanner.nextLine());
+			return routes.get(routeIndex-1);
+		} catch (Exception e) {
+			System.out.println(ErrorMesssageConstant.ERROR_INPUT_NON_NUMBER);
+			return scanTransitFlightOption(routes, scanner);
+		}
+	}
 	
 	public boolean confirmSelectedFlight(Route route, Scanner scanner) {
-		System.out.print(MenuText.getFlightConfirmation(route.getFromDestination().getName(), route.getToDestination().getName(), route.getFlightDay(), route.getAvailableSeats()));
+		System.out.println(MenuText.getFlightConfirmation(route.getFromDestination().getName(), route.getToDestination().getName(), route.getFlightDay(), route.getAvailableSeats()));
+		System.out.print(MenuText.CONFIRM_THIS_BOOKING_MESSAGE);
+		String input = scanner.nextLine();
+		return input.equals("y");
+	}
+
+	public boolean confirmSelectedTransitFlight(Route[] routes, Scanner scanner) {
+		for (Route route: routes) {
+			System.out.println(MenuText.getFlightConfirmation(route.getFromDestination().getName(), route.getToDestination().getName(), route.getFlightDay(), route.getAvailableSeats()));
+		}
+		System.out.print(MenuText.CONFIRM_THIS_BOOKING_MESSAGE);
 		String input = scanner.nextLine();
 		return input.equals("y");
 	}
@@ -55,6 +85,17 @@ public class ChooseFlightHandler {
 			throw e;
 		}
 	}
-	
+
+	public Booking[] createBooking(Route[] route) throws NoSeatException {
+		try {
+			return bookingService.createBooking(route);
+		} catch (NoSeatException e) {
+			System.out.println(e.getMessage());
+			throw e;
+		} catch (DuplicateKeyException e) {
+			System.out.println("same booking");
+			throw e;
+		}
+	}
 }
 

@@ -1,10 +1,12 @@
 package com.mitrais.rnd.FlightManagementSystem.controller.passenger;
 
 import com.mitrais.rnd.FlightManagementSystem.controller.Displayable;
+import com.mitrais.rnd.FlightManagementSystem.enums.SystemOperationsOptions;
 import com.mitrais.rnd.FlightManagementSystem.util.UserContextHolder;
 import com.mitrais.rnd.FlightManagementSystem.constant.MenuText;
 import com.mitrais.rnd.FlightManagementSystem.enums.PassengerOptions;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.stereotype.Controller;
 
 import java.util.Scanner;
@@ -12,12 +14,16 @@ import java.util.Scanner;
 @Controller
 @RequiredArgsConstructor
 public class PassengerMenuDisplay implements Displayable {
-	
 	private final BookingFlightDisplay bookingFlightDisplay;
+    @Setter
+    private Displayable backMenu;
 
     @Override
     public void display() {
         System.out.println(MenuText.getPassengerMenuDisplayText(UserContextHolder.getUserContext().getName()));
+        for (PassengerOptions menu: PassengerOptions.values()){
+            System.out.println(menu);
+        }
     }
 
     private Displayable manageMenu() {
@@ -32,10 +38,10 @@ public class PassengerMenuDisplay implements Displayable {
                 System.out.println("my booking");
                 break;
             default:
-                System.out.println("default");
-                break;
+                UserContextHolder.setUserContext(null);
+                return backMenu;
         }
-        return null;
+        return this;
     }
 
     @Override
