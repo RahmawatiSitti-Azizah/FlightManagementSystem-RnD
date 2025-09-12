@@ -10,23 +10,36 @@ import java.util.UUID;
 
 @Entity
 @AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
-public class Route {
+@NoArgsConstructor
+@Table(name = "booking", uniqueConstraints = {
+		@UniqueConstraint(columnNames = {"aircraft", "transitDestination", "fromDestination", "toDestination", "flightDay", "user"})
+})
+public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+    @Column(unique = true)
+    private String booking_id;
     @OneToOne
     @JoinColumn(name = "aircraft_id", nullable = true)
     private Aircraft aircraft;
+    @OneToOne
+    @JoinColumn(name = "transit_destination_id", nullable = true)
+    private Destination transitDestination;
     @OneToOne
     @JoinColumn(name = "from_destination_id", nullable = true)
     private Destination fromDestination;
     @OneToOne
     @JoinColumn(name = "to_destination_id", nullable = true)
-    private Destination toDestination;
+	private Destination toDestination;
     private int flightDay;
     private String status;
-	private int availableSeats;
+	@OneToOne
+	@JoinColumn(name="seat_id", nullable = false)
+	private Seat seat;
+	@OneToOne
+	@JoinColumn(name="user_id", nullable = false)
+	private AppUser user;
 }

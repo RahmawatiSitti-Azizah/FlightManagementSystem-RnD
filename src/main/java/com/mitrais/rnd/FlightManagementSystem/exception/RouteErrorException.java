@@ -7,4 +7,5 @@ public class RouteErrorException extends Exception{
     public RouteErrorException() {
         super(ErrorMesssageConstant.SAME_DEPARTURE_DESTINATION_ERROR);
     }
+
 }

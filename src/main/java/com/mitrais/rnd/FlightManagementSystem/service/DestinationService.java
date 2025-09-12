@@ -1,6 +1,5 @@
 package com.mitrais.rnd.FlightManagementSystem.service;
 
-import com.mitrais.rnd.FlightManagementSystem.entity.AppUser;
 import com.mitrais.rnd.FlightManagementSystem.entity.Destination;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
