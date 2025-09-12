@@ -59,7 +59,7 @@ create table if not exists booking (
     foreign key (from_destination_id) references destination(id),
     foreign key (transit_destination_id) references destination(id),
     foreign key (to_destination_id) references destination(id),
-    foreign key (user_id) references user(id),
+    foreign key (user_id) references app_user(id),
     unique(aircraft_id, transit_destination_id, from_destination_id, to_destination_id, flight_day, user_id)
 );
 

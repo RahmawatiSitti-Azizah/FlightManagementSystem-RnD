@@ -22,6 +22,7 @@ public class MenuText {
     private static final String PROCESSING_FLIGHT = "Processing flight: %s -> %s";
     private static final String AIRCRAFT_NAME = "Aircraft : %s";
     private static final String PASSENGER_BOARDING = "Passenger boarding : %d";
+    private static final String PASSENGER_LIST_TEXT = "- %s (seat %s)";
     public static final String WELCOME_PROGRAM_BANNER = "---------------------------------------\nWelcome to RnD Flight Management System\n---------------------------------------";
     public static final String REGISTER_AIRCRAFT_HEADER = "===== REGISTER AIRCRAFT =====\n";
     public static final String ADD_DESTINATION_HEADER = "===== ADD DESTINATION =====";
@@ -50,6 +51,8 @@ public class MenuText {
     public static final String SELECT_FLIGHT = "Input selected flight (number): ";
     public static final String SHOW_FLIGHT = "%s. %s -> %s (Day %s, %s available seats)";
     public static final String NO_FLIGHT_AVAILABLE_TODAY = "No flight scheduled for today";
+    private static final String FLIGHT_STATUS_CHANGE = "Flight status : %s\nFlight status : %s";
+
     public static String getAdminMenuDisplayText(String name) {
         return String.format(ADMIN_MENU_DISPLAY, name);
     }
@@ -110,6 +113,10 @@ public class MenuText {
     }
 
     public static String getProcessFlight(){
-        return String.format("Flight status : %s\nFlight status : %s", "DEPARTED", "ARRIVED");
+        return String.format(FLIGHT_STATUS_CHANGE, "DEPARTED", "ARRIVED");
+    }
+
+    public static String getPassengerListText(String passengerName, String passengerSeat){
+        return String.format(PASSENGER_LIST_TEXT,passengerName,passengerSeat);
     }
 }

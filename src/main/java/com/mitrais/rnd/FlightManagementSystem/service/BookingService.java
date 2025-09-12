@@ -2,8 +2,13 @@ package com.mitrais.rnd.FlightManagementSystem.service;
 
 import com.mitrais.rnd.FlightManagementSystem.entity.Booking;
 import com.mitrais.rnd.FlightManagementSystem.entity.Route;
+import com.mitrais.rnd.FlightManagementSystem.enums.BookingStatus;
 import com.mitrais.rnd.FlightManagementSystem.exception.NoSeatException;
+
+import java.util.List;
 
 public interface BookingService {
     public Booking createBooking(Route route) throws NoSeatException;
+    public List<Booking> getListBookingByRoute(Route route);
+    public void updateBookingStatus(List<Booking> bookings, BookingStatus status);
 }

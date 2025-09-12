@@ -3,6 +3,7 @@ package com.mitrais.rnd.FlightManagementSystem.service.impl;
 import com.mitrais.rnd.FlightManagementSystem.entity.Booking;
 import com.mitrais.rnd.FlightManagementSystem.entity.Route;
 import com.mitrais.rnd.FlightManagementSystem.entity.Seat;
+import com.mitrais.rnd.FlightManagementSystem.enums.BookingStatus;
 import com.mitrais.rnd.FlightManagementSystem.exception.NoSeatException;
 import com.mitrais.rnd.FlightManagementSystem.repository.BookingRepository;
 import com.mitrais.rnd.FlightManagementSystem.repository.RouteRepository;
@@ -13,6 +14,8 @@ import com.mitrais.rnd.FlightManagementSystem.util.BookingIdGenerator;
 import com.mitrais.rnd.FlightManagementSystem.util.ObjectTransformer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -46,4 +49,17 @@ public class BookingServiceImpl implements BookingService {
 		
 		return booking;
     }
+
+	@Override
+	public List<Booking> getListBookingByRoute(Route route) {
+		List<Booking> result = bookingRepository.findBySeatRouteId(route.getId());
+		return result;
+	}
+
+	@Override
+	public void updateBookingStatus(List<Booking> bookings, BookingStatus status) {
+		bookings = bookings.stream().map(booking -> {booking.setBooking_id(status.getCode());
+		return booking;}).toList();
+		bookingRepository.saveAll(bookings);
+	}
 }

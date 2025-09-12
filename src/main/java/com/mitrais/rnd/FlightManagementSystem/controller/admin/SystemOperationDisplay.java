@@ -49,6 +49,9 @@ public class SystemOperationDisplay implements Displayable {
                 disableBookingDisplay.setBackMenu(this);
                 return disableBookingDisplay;
             }
+            default:{
+                return backMenu;
+            }
         }
     }
 
