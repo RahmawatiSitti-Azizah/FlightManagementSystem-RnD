@@ -50,7 +50,7 @@ To set up **FMS** on your local machine:
 
 After the application is running:
 
-Start exploring the application with logging in with registered user account. Please refer to ![database](src\main\resources\data.sql)
+Start exploring the application with logging in with registered user account. Please refer to ![database](src/main/resources/data.sql)
 
 ## Dependencies
 
