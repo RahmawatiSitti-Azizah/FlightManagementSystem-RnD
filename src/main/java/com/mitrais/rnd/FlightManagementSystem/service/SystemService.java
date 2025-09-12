@@ -5,4 +5,5 @@ import com.mitrais.rnd.FlightManagementSystem.entity.SystemConfig;
 public interface SystemService {
     public void advanceSystemDay();
     public SystemConfig getCurrentSystemDay();
+    public void setBookingServiceStatus(Boolean status);
 }

@@ -31,6 +31,10 @@ public class MenuText {
     public static final String AIRCRAFT_LIST = "Available Aircraft List: ";
     public static final String ENTER_DEPARTURE = "Enter Departure: ";
     public static final String ENTER_DAY = "Enter Day: ";
+    public static final String ENABLE_BOOKING_SERVICE = "Enabling booking service...";
+    public static final String SUCCESS_ENABLE_BOOKING_SERVICE = "Booking service enabled";
+    public static final String DISABLE_BOOKING_SERVICE = "Disabling booking service...";
+    public static final String SUCCESS_DISABLE_BOOKING_SERVICE = "Booking service disabled";
 
     public static final String CREATE_BOOKING = "===== CREATE BOOKING =====\n";
     public static final String SEARCH_FLIGHT = "Searching flight...";
